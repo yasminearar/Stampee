@@ -1,0 +1,160 @@
+/* ===== Variables couleurs ===== */
+:root {
+  --color-bordeaux: #7C2D26;
+  --color-bleu-royal: #203843;
+  --color-bleu-ardoise: #5E7383;
+  --color-beige-sable: #DDD8CC;
+  --color-creme-leger: #EFEAE2;
+  --color-texte: #203843;
+  --color-blanc: #ffffff;
+  --color-fond-beige: #f5f2ed;
+  --color-texte-fonce: #2c2c2c;
+  --color-bouton-rouge: #632420;
+  --color-bordure: #000;
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Playfair Display', 'inter', sans-serif;
+  font-size: 1rem;
+  background-color: var(--color-creme-leger);
+  color: var(--color-texte);
+  line-height: 1.6;
+}
+
+
+
+/* ===== Titres ===== */
+h1,
+.h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-bordeaux);
+  margin-bottom: 1rem;
+}
+
+h2,
+.h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-bleu-royal);
+  margin-bottom: 1rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-bleu-royal);
+  margin-bottom: 0.5rem;
+}
+
+/* ===== Paragraphes ===== */
+p {
+  margin-bottom: 1rem;
+}
+
+/* ===== Liens ===== */
+a {
+  text-decoration: none;
+  color: var(--color-bleu-royal);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--color-bleu-ardoise);
+}
+
+/* ===== Images ===== */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== Page titre et description ===== */
+.page-titre {
+  text-align: center;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 0 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-bordeaux);
+  font-family: 'Playfair Display', serif;
+  text-shadow: 1px 1px 2px rgba(124, 45, 38, 0.1);
+}
+
+.page-description {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-size: 1.1rem;
+  color: var(--color-bleu-royal);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  padding: 0 1rem;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .page-titre {
+    font-size: 2rem;
+    margin: 1.5rem auto;
+  }
+  
+  .page-description {
+    font-size: 1rem;
+    margin: 0 auto 2rem;
+    padding: 0 0.5rem;
+  }
+  
+  body {
+    font-size: 0.95rem;
+  }
+  
+  h2, .h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3, .h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-titre {
+    font-size: 1.75rem;
+    margin: 1rem auto;
+  }
+  
+  .page-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 0 0.25rem;
+  }
+  
+  body {
+    font-size: 0.9rem;
+  }
+  
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3, .h3 {
+    font-size: 1.25rem;
+  }
+}

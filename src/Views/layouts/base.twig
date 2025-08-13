@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="{% block description %}Plateforme d'enchères de timbres rares et d'exception{% endblock %}">
+  <title>{% block title %}Lord Stampee{% endblock %}</title>
+  <link rel="stylesheet" href="{{ ASSET }}assets/css/main.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {% block styles %}{% endblock %}
+</head>
+<body>
+
+<!-- En-tête -->
+<header class="entete">
+  <div class="entete__haut">
+    <div class="entete__logo">
+      <img src="{{ ASSET }}assets/img/logo.svg" alt="Logo Lord Stampee" />
+      <div class="entete__branding">
+        <span class="entete__nom">Lord Stampee</span>
+        <span class="entete__slogan">Enchères de timbres d'exception</span>
+      </div>
+    </div>
+  </div>
+  <hr class="entete__separateur" />
+</header>
+
+<!-- Messages flash -->
+{% if flash_messages %}
+<div class="flash-messages">
+  {% for message in flash_messages %}
+  <div class="flash-message flash-{{ message.type }}">
+    {{ message.message }}
+    <button class="close-flash">&times;</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- Contenu principal -->
+<main class="contenu-principal">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Pied de page -->
+<footer class="footer">
+  <div class="footer__contenu">
+    <div class="footer__logo footer__colonne">
+      <img src="{{ ASSET }}assets/img/logo.svg" alt="Logo Lord Stampee" />
+    </div>
+  </div>
+
+  <hr class="footer__ligne" />
+
+  <p class="footer__copyright">
+    &copy; {{ "now"|date("Y") }} Lord Stampee. Tous droits réservés
+  </p>
+</footer>
+
+{% block scripts %}
+<script>
+  // Gestion des messages flash
+  document.addEventListener('DOMContentLoaded', function() {
+    const closeButtons = document.querySelectorAll('.close-flash');
+    closeButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        this.parentNode.remove();
+      });
+    });
+  });
+</script>
+{% endblock %}
+
+</body>
+</html>

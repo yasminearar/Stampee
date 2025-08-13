@@ -1,0 +1,72 @@
+/* filtres-sidebar.css - Styles de la sidebar des filtres */
+
+/* Filtres - Sidebar à gauche */
+.filtres {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 280px;
+  background: linear-gradient(135deg, var(--color-creme-leger) 0%, var(--color-beige-sable) 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(32, 56, 67, 0.1);
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  border: 1px solid rgba(124, 45, 38, 0.1);
+}
+
+.filtres__titre {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-bordeaux);
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+}
+
+.filtres__formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filtres__section {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  border: 1px solid rgba(94, 115, 131, 0.2);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.filtres__section:hover {
+  box-shadow: 0 2px 8px rgba(32, 56, 67, 0.1);
+}
+
+.filtres__section-titre {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-bleu-royal);
+  cursor: pointer;
+  padding: 0.8rem 1rem;
+  background: linear-gradient(90deg, rgba(124, 45, 38, 0.05) 0%, rgba(32, 56, 67, 0.05) 100%);
+  list-style: none;
+  user-select: none;
+  border-bottom: 1px solid rgba(94, 115, 131, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.filtres__section-titre:hover {
+  background: linear-gradient(90deg, rgba(124, 45, 38, 0.1) 0%, rgba(32, 56, 67, 0.1) 100%);
+}
+
+.filtres__section-titre::marker {
+  display: none;
+}
+
+.filtres__section-titre::-webkit-details-marker {
+  display: none;
+}
+
+.filtres__section-titre--active {
+  background: linear-gradient(90deg, rgba(124, 45, 38, 0.08) 0%, rgba(32, 56, 67, 0.08) 100%);
+}

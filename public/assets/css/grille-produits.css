@@ -1,0 +1,38 @@
+/* grille-produits.css */
+
+.grille-produits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--color-creme-leger);
+}
+
+.grille-produits > .carte-produit {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1200px) {
+  .grille-produits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grille-produits {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grille-produits {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+}

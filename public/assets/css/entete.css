@@ -1,0 +1,554 @@
+/* === En-tête principale === */
+.entete {
+  font-family: 'inter', sans-serif;
+}
+
+.entete__haut {
+  background-color: var(--color-bordeaux);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.entete__logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-creme-leger);
+  min-width: 240px;
+  flex-shrink: 0;
+}
+
+.entete__logo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.entete__branding {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.entete__nom {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.entete__slogan {
+  font-size: 0.85rem;
+  font-weight: 400;
+  opacity: 0.9;
+  font-style: italic;
+}
+
+/* Section centrale avec recherche */
+.entete__centre {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  min-width: 250px;
+}
+
+.entete__recherche {
+  background-color: var(--color-creme-leger);
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.entete__recherche:focus-within {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  border-color: rgba(239, 234, 226, 0.3);
+}
+
+.entete__recherche input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.1rem;
+  color: var(--color-bleu-royal);
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.entete__recherche input::placeholder {
+  color: rgba(32, 56, 67, 0.6);
+  font-weight: 400;
+}
+
+.entete__recherche button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.5rem;
+  color: var(--color-bleu-royal);
+  transition: color 0.3s ease;
+}
+
+.entete__recherche button:hover {
+  color: var(--color-bordeaux);
+}
+
+/* Actions du header */
+.entete__actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  color: var(--color-creme-leger);
+  min-width: 350px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.entete__info-rapide {
+  display: flex;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+  border-right: 1px solid rgba(245, 245, 220, 0.3);
+}
+
+.entete__encheres-actives,
+.entete__temps-restant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.entete__nombre {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-creme-leger);
+}
+
+.entete__compte-rebours {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FFD700;
+}
+
+.entete__label {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.entete__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 1.5rem;
+  border-right: 1px solid rgba(245, 245, 220, 0.3);
+}
+
+.entete__telephone {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.entete__horaires {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.entete__actions-utilisateur {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.entete__action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--color-creme-leger);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.entete__action-btn:hover {
+  background-color: rgba(245, 245, 220, 0.1);
+}
+
+.entete__action-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.entete__badge,
+.entete__notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #FF4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+}
+
+.entete__profil-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(245, 245, 220, 0.1);
+  border: 1px solid rgba(245, 245, 220, 0.3);
+  color: var(--color-creme-leger);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.entete__profil-btn:hover {
+  background-color: rgba(245, 245, 220, 0.2);
+  border-color: rgba(245, 245, 220, 0.5);
+}
+
+/* === Menu principal === */
+.entete__menu-principal {
+  background-color: var(--color-bordeaux); 
+  text-align: center;
+  border-bottom: 1px solid var(--color-creme-leger);
+}
+
+.entete__menu-principal ul {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding: 0.75rem 0;
+  list-style: none;
+}
+
+.entete__menu-principal a {
+  color: var(--color-creme-leger);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.entete__menu-principal a:hover {
+  border-bottom: 2px solid var(--color-creme-leger);
+}
+
+/* === Menu secondaire === */
+.entete__menu-secondaire {
+  background-color: var(--color-beige-sable); 
+  padding: 0.5rem 1rem;
+}
+
+.entete__menu-secondaire ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.entete__menu-secondaire a {
+  color: var(--color-bleu-royal); 
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.entete__menu-secondaire a:hover {
+  border-bottom: 2px solid var(--color-bleu-royal);
+}
+
+.entete__btn {
+  background-color: var(--color-bleu-royal);
+  color: var(--color-creme-leger);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.entete__separateur {
+  border: none;
+  height: 2px;
+  background-color: var(--color-creme-leger); 
+  margin: 0;
+}
+
+/* Styles spéciaux pour certaines actions */
+.entete__action-btn[title="Voir les timbres de proche"] {
+  background-color: rgba(239, 234, 226, 0.15);
+  border: 1px solid rgba(239, 234, 226, 0.3);
+}
+
+.entete__action-btn[title="Voir les timbres de proche"]:hover {
+  background-color: rgba(239, 234, 226, 0.25);
+  border-color: rgba(239, 234, 226, 0.5);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Informations de contact dans le header */
+.entete__contact {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.entete__telephone {
+  color: var(--color-creme-leger);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.entete__telephone-icon {
+  background-color: var(--color-creme-leger);
+  border-radius: 50%;
+  padding: 0.25rem;
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .entete__haut {
+    gap: 0.75rem;
+  }
+  
+  .entete__actions {
+    min-width: 320px;
+    gap: 1.5rem;
+  }
+  
+  .entete__centre {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .entete__info-rapide {
+    display: none;
+  }
+  
+  .entete__actions {
+    min-width: 280px;
+    gap: 1rem;
+  }
+  
+  .entete__centre {
+    max-width: 450px;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .entete__contact {
+    display: none;
+  }
+  
+  .entete__actions {
+    min-width: 200px;
+    gap: 1rem;
+  }
+  
+  .entete__action-text {
+    display: none;
+  }
+  
+  .entete__centre {
+    max-width: 400px;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 900px) {
+  .entete__haut {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .entete__logo {
+    min-width: auto;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .entete__centre {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    margin: 0;
+  }
+  
+  .entete__actions {
+    order: 1;
+    min-width: auto;
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .entete__logo img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .entete__branding {
+    gap: 0.1rem;
+  }
+  
+  .entete__nom {
+    font-size: 1.1rem;
+  }
+  
+  .entete__slogan {
+    font-size: 0.8rem;
+  }
+  
+  .entete__actions {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .entete__actions-utilisateur {
+    gap: 0.75rem;
+  }
+  
+  .entete__action-btn {
+    padding: 0.4rem;
+  }
+  
+  .entete__menu-principal ul {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+  
+  .entete__menu-principal a {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .entete__menu-secondaire ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  
+  .entete__menu-secondaire a {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .entete__haut {
+    padding: 0.75rem 0.5rem;
+    gap: 0.75rem;
+  }
+  
+  .entete__logo img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .entete__nom {
+    font-size: 1rem;
+  }
+  
+  .entete__slogan {
+    font-size: 0.7rem;
+  }
+  
+  .entete__actions {
+    gap: 0.5rem;
+  }
+  
+  .entete__actions-utilisateur {
+    gap: 0.5rem;
+  }
+  
+  .entete__action-btn {
+    padding: 0.3rem;
+  }
+  
+  .entete__badge,
+  .entete__notification-badge {
+    font-size: 0.6rem;
+    min-width: 16px;
+    padding: 0.1rem 0.3rem;
+  }
+  
+  .entete__menu-principal ul {
+    gap: 1rem;
+    padding: 0.75rem 0;
+  }
+  
+  .entete__menu-principal a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .entete__menu-secondaire {
+    padding: 0.4rem 0.5rem;
+  }
+  
+  .entete__menu-secondaire a {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .entete__menu-secondaire ul {
+    gap: 0.3rem;
+  }
+  
+  .entete__recherche {
+    padding: 0.5rem 1rem;
+  }
+  
+  .entete__recherche input {
+    font-size: 0.9rem;
+  }
+}
+

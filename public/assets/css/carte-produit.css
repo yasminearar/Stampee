@@ -1,0 +1,109 @@
+/* carte-produit.css */
+
+/* Conteneur principal de la carte */
+.carte-produit {
+  background-color: var(--color-creme-leger); 
+  border: 1px solid var(--color-beige-sable); 
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  min-height: 100%;
+}
+
+.carte-produit:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carte-produit__image-container {
+  width: 100%;
+  padding-top: 75%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-fond-beige);
+  border-bottom: 1px solid var(--color-beige-sable);
+}
+
+/* Contenu texte */
+.carte-produit__contenu {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
+/* Titre */
+.carte-produit__titre {
+  font-size: 1.2rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--color-bordeaux); 
+  margin: 0;
+}
+
+/* Informations */
+.carte-produit__infos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-bleu-royal); 
+}
+
+.carte-produit__infos li {
+  margin-bottom: 0.25rem;
+}
+
+/* Bouton */
+.carte-produit__btn {
+  background-color: var(--color-bordeaux);
+  color: var(--color-blanc);
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  display: block;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.carte-produit__btn:hover {
+  background-color: var(--color-bouton-rouge);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carte-produit {
+    padding: 0.5rem;
+  }
+  
+  .carte-produit__contenu {
+    padding: 0.75rem;
+    gap: 0.4rem;
+  }
+  
+  .carte-produit__titre {
+    font-size: 1.1rem;
+  }
+  
+  .carte-produit__infos {
+    font-size: 0.9rem;
+  }
+  
+  .carte-produit__btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,18 @@
+@import "base.css";
+@import "utilities.css";
+@import "layout.css";
+@import "carte-produit.css";
+@import "footer.css";
+@import "entete.css";
+@import "filtres-sidebar.css";
+@import "filtres-form.css";
+@import "catalogue.css";
+@import "layout-responsive.css";
+@import "grille-produits.css";
+@import "fiche-timbre.css";
+
+/* Règle universelle pour prévenir l'avertissement h1 dans les sections */
+section h1, article h1, aside h1, nav h1 {
+  font-size: 2rem !important;
+}
+

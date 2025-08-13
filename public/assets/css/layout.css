@@ -1,0 +1,33 @@
+/* layout.css - Styles de mise en page généraux */
+
+/* Mise en page CSS (Layout) */
+.contenu-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--color-fond-beige);
+}
+
+/* Layout principal */
+.contenu-principal {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contenu-principal {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenu-principal {
+    padding: 0.5rem;
+  }
+}

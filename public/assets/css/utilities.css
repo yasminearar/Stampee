@@ -1,0 +1,70 @@
+/* utilities.css - Classes communes pour éviter la duplication */
+
+/* Classe commune pour les images avec positioning absolu et object-fit */
+.img-positioned {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Classe spécifique pour les images de cartes produit */
+.img-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 5px;
+}
+
+/* Classe commune pour les boutons ronds avec transition */
+.btn-round {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Classe commune pour les éléments avec badge positionné */
+.badge-container {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: var(--color-bordeaux);
+  color: var(--color-creme-leger);
+  border: 2px solid var(--color-creme-leger);
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Classe commune pour les éléments flexbox centrés */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Classe commune pour les icônes */
+.icon {
+  width: 24px;
+  height: 24px;
+}

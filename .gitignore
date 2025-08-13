@@ -1,0 +1,49 @@
+# Fichiers générés par le système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers générés par l'IDE/éditeur
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Dépendances
+/vendor/
+/node_modules/
+
+# Cache Composer
+composer.phar
+/composer.lock
+
+# Cache de l'application
+/cache/
+*.cache
+*.log
+
+# Fichiers d'environnement
+.env
+.env.local
+.env.*.local
+.phpunit.result.cache
+
+# Cache Twig
+/cache/twig/*
+*.twig.php
+
+# Fichiers temporaires
+/tmp/
+/temp/
+
+# Fichiers de configuration locaux (potentiellement avec des identifiants)
+/config.local.php
+
+# Fichiers de build
+/build/
+/dist/
+
+# Autres
+*.bak
+*.swp
+*.swo

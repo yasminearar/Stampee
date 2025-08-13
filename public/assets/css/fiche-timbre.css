@@ -1,0 +1,316 @@
+section h1, article h1, aside h1, nav h1 {
+  font-size: inherit !important;
+}
+
+section .fiche-timbre__entete h1,
+section h1.fiche-timbre__titre {
+  font-size: 2rem !important;
+}
+
+.fiche-timbre {
+  display: flex;
+  gap: 3rem;
+  background-color: var(--color-blanc);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+/* Bloc gauche */
+.fiche-timbre__media {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  max-width: 400px;
+  min-width: 280px; 
+  width: 100%; 
+}
+
+.fiche-timbre__image-principale {
+  margin-bottom: 1rem;
+  border: 3px solid var(--color-bordure);
+  border-radius: 4px;
+  background-color: var(--color-blanc);
+  padding: 10px;
+  position: relative;
+  /* Dimensions fixes pour le cadre */
+  aspect-ratio: 3/4; 
+  overflow: hidden;
+}
+
+.fiche-timbre__image-principale img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  transition: opacity 0.3s ease, transform 0.4s ease; 
+}
+
+/* Effet de zoom subtil au survol de l'image principale */
+.fiche-timbre__image-principale:hover img {
+  transform: scale(1.03); 
+}
+
+/* Miniatures */
+.fiche-timbre__miniatures {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center; 
+  width: 100%;
+}
+
+.fiche-timbre__miniature {
+  /* Utilisation de pourcentages pour une taille relative */
+  width: 30%; 
+  aspect-ratio: 1/1; 
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--color-blanc);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0; 
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  max-width: 90px; 
+}
+
+.fiche-timbre__miniature img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  background-color: var(--color-blanc);
+  border-radius: 2px;
+}
+
+.fiche-timbre__miniature:hover {
+  border-color: var(--color-bordeaux);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fiche-timbre__miniature--active {
+  border-color: var(--color-bouton-rouge);
+  border-width: 3px;
+}
+
+/* Règles de media query pour la responsivité des miniatures */
+@media (max-width: 768px) {
+  .fiche-timbre__miniatures {
+    justify-content: flex-start; 
+    max-width: 100%;
+    overflow-x: auto; 
+    padding-bottom: 0.5rem; 
+    scrollbar-width: thin;
+  }
+  
+  .fiche-timbre__miniature {
+    min-width: 70px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .fiche-timbre__miniature {
+    min-width: 60px; 
+  }
+}
+
+/* Bloc droit */
+.fiche-timbre__contenu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fiche-timbre__entete h1 {
+  font-size: 2rem;
+  color: var(--color-bordeaux);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+/* Explicit font-size for h1 within section context to prevent browser warnings */
+section .fiche-timbre__entete h1 {
+  font-size: 2rem !important;
+}
+
+/* Additional specificity for h1 title class */
+.fiche-timbre__titre {
+  font-size: 2rem !important;
+}
+
+/* Maximum specificity for sectioning content h1 */
+section.fiche-timbre__contenu .fiche-timbre__entete h1.fiche-timbre__titre {
+  font-size: 2rem !important;
+}
+
+.fiche-timbre__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.fiche-timbre__live-indicateur {
+  color: var(--color-bordeaux);
+  font-size: 1.2rem;
+  animation: pulse 1.5s infinite;
+}
+
+.fiche-timbre__live-texte {
+  color: var(--color-bordeaux);
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.fiche-timbre__lot {
+  color: var(--color-bordeaux);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border: 1px solid var(--color-bordeaux);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.fiche-timbre__lot:hover {
+  background-color: var(--color-bordeaux);
+  color: var(--color-blanc);
+}
+
+/* Détails */
+.fiche-timbre__sous-titre {
+  color: var(--color-bordeaux);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--color-bordeaux);
+  padding-bottom: 0.5rem;
+}
+
+.fiche-timbre__ligne {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.fiche-timbre__label {
+  font-weight: 600;
+  color: var(--color-bleu-royal);
+}
+
+.fiche-timbre__valeur {
+  color: var(--color-bordeaux);
+  font-weight: 500;
+  text-align: right;
+}
+
+.fiche-timbre__valeur--important {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-bouton-rouge);
+}
+
+/* Description */
+.fiche-timbre__description p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* Actions */
+.fiche-timbre__actions {
+  margin-top: auto;
+  text-align: center;
+}
+
+.fiche-timbre__btn {
+  background-color: var(--color-bouton-rouge);
+  color: var(--color-blanc);
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.fiche-timbre__btn:hover {
+  background-color: var(--color-bouton-rouge);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fiche-timbre__info {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-bordeaux);
+  font-style: italic;
+}
+
+/* Animation */
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fiche-timbre {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+
+  .fiche-timbre__media {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .fiche-timbre__image-principale {
+    max-width: 350px;
+    margin: 0 auto 1rem auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .fiche-timbre {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .fiche-timbre__entete h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Explicit font-size for h1 within section context (responsive) */
+  section .fiche-timbre__entete h1 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Additional specificity for h1 title class (responsive) */
+  .fiche-timbre__titre {
+    font-size: 1.5rem !important;
+  }
+
+  /* Maximum specificity for sectioning content h1 (responsive) */
+  section.fiche-timbre__contenu .fiche-timbre__entete h1.fiche-timbre__titre {
+    font-size: 1.5rem !important;
+  }
+}

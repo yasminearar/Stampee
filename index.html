@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lord Stampee - Plateforme d'enchères de timbres rares et d'exception. Découvrez notre collection de timbres historiques authentifiés. Enchères en temps réel, expertise professionnelle. Albert Ier, Marianne, Gandhi et plus encore.">
+  <title>Catalogue des enchères – Stampee</title>
+  <link rel="stylesheet" href="./public/assets/css/main.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+ <!-- En-tête -->
+<header class="entete">
+  <div class="entete__haut">
+    <div class="entete__logo">
+      <img src="public/assets/img/logo.svg" alt="Logo Lord Stampee" />
+      <div class="entete__branding">
+        <span class="entete__nom">Lord Stampee</span>
+        <span class="entete__slogan">Enchères de timbres d'exception</span>
+      </div>
+    </div>
+    
+    <div class="entete__centre">
+      <div class="entete__recherche">
+        <input type="search" placeholder="Rechercher des timbres, pays, années..." aria-label="Recherche" />
+        <button aria-label="Rechercher">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10,2A8,8,0,1,1,2,10,8,8,0,0,1,10,2m0-2a10,10,0,1,0,10,10A10,10,0,0,0,10,0Z" />
+            <line x1="21" y1="21" x2="15" y2="15" stroke="#203843" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="entete__actions">
+      <!-- Informations utiles -->
+      <div class="entete__info-rapide">
+        <div class="entete__encheres-actives">
+          <span class="entete__nombre">24</span>
+          <span class="entete__label">Enchères actives</span>
+        </div>
+        <div class="entete__temps-restant">
+          <span class="entete__compte-rebours">2h 15m</span>
+          <span class="entete__label">Prochaine clôture</span>
+        </div>
+      </div>
+      
+      <!-- Informations de contact compactes -->
+      <div class="entete__contact">
+        <div class="entete__telephone">
+          <svg class="entete__telephone-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#203843" viewBox="0 0 24 24">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+          <span>+1 (555) 123-STAMP</span>
+        </div>
+        <div class="entete__horaires">
+          <span>Lun-Ven 9h-18h</span>
+        </div>
+      </div>
+      
+      <!-- Actions utilisateur -->
+      <div class="entete__actions-utilisateur">
+        <!-- Sélecteur de langue -->
+        <button class="entete__action-btn" aria-label="Choisir la langue" title="Choisir la langue">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          <span class="entete__action-text">FR</span>
+        </button>
+        
+        <!-- Favoris -->
+        <button class="entete__action-btn" aria-label="Mes favoris" title="Mes favoris">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span class="entete__badge">5</span>
+        </button>
+        
+        <!-- Notifications -->
+        <button class="entete__action-btn" aria-label="Notifications" title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+          </svg>
+          <span class="entete__notification-badge">3</span>
+        </button>
+        
+        <!-- Profil utilisateur -->
+        <div class="entete__profil">
+          <button class="entete__profil-btn" aria-label="Mon profil" title="Profil et historique">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span class="entete__action-text">Mon compte</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="entete__separateur" />
+
+  <nav class="entete__menu-principal">
+    <ul>
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#">Enchères</a></li>
+      <li><a href="#">Archives</a></li>
+      <li><a href="#">À propos</a></li>
+      <li><a href="#">Profil</a></li>
+      <li><a href="#">Aide</a></li>
+    </ul>
+  </nav>
+
+  <nav class="entete__menu-secondaire">
+    <ul>
+      <li><a href="#">À propos de Lord Reginald Stampee III</a></li>
+      <li><a href="#">Actualités</a></li>
+      <li><a href="#">Devenir membre</a></li>
+      <li><a href="#">Fonctionnement de la plateforme</a></li>
+      <li><button class="entete__btn">Se connecter</button></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <!-- Titre principal de la page -->
+  <h1 class="page-titre">Collection de timbres rares - Enchères Lord Stampee</h1>
+  <p class="page-description">Découvrez notre sélection exceptionnelle de timbres rares et historiques. Participez aux enchères en temps réel et enrichissez votre collection avec des pièces authentifiées par nos experts.</p>
+
+  <!-- Contenu principal avec layout côte à côte -->
+  <div class="contenu-principal">
+    
+    <!-- Filtres à gauche -->
+    <aside class="filtres">
+      <h2 class="filtres__titre">Filtres</h2>
+      
+      <form class="filtres__formulaire">
+        
+        <!-- Section Timbre -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Timbre</summary>
+          
+          <div class="filtres__champ">
+            <label for="nom-timbre" class="filtres__label">Nom</label>
+            <input type="text" id="nom-timbre" name="nom-timbre" class="filtres__input" placeholder="Rechercher...">
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Année</label>
+            <div class="filtres__range">
+              <input type="number" id="annee-min" name="annee-min" class="filtres__input filtres__input--small" placeholder="1840" min="1840" max="2025">
+              <span class="filtres__separator">-</span>
+              <input type="number" id="annee-max" name="annee-max" class="filtres__input filtres__input--small" placeholder="2025" min="1840" max="2025">
+            </div>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="pays-origine" class="filtres__label">Pays</label>
+            <select id="pays-origine" name="pays-origine" class="filtres__select">
+              <option value="">Tous</option>
+              <option value="france">France</option>
+              <option value="royaume-uni">Royaume-Uni</option>
+              <option value="canada">Canada</option>
+              <option value="allemagne">Allemagne</option>
+              <option value="usa">États-Unis</option>
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">État</label>
+            <div class="filtres__radio-groupe">
+              <label class="filtres__radio-label">
+                <input type="radio" name="condition" value="neuf" class="filtres__radio">
+                <span class="filtres__radio-texte">Neuf</span>
+              </label>
+              <label class="filtres__radio-label">
+                <input type="radio" name="condition" value="bon" class="filtres__radio">
+                <span class="filtres__radio-texte">Bon</span>
+              </label>
+              <label class="filtres__radio-label">
+                <input type="radio" name="condition" value="utilise" class="filtres__radio">
+                <span class="filtres__radio-texte">Utilisé</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Certifié</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="certifie" class="filtres__toggle-input">
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+        </details>
+        
+        <!-- Section Enchère -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Enchère</summary>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Actives seulement</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="actives-seulement" class="filtres__toggle-input" checked>
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Prix ($)</label>
+            <div class="filtres__range">
+              <input type="number" id="prix-min" name="prix-min" class="filtres__input filtres__input--small" placeholder="0" min="0">
+              <span class="filtres__separator">-</span>
+              <input type="number" id="prix-max" name="prix-max" class="filtres__input filtres__input--small" placeholder="5000" min="0">
+            </div>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="date-fin" class="filtres__label">Fin avant</label>
+            <input type="date" id="date-fin" name="date-fin" class="filtres__input">
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Coups de cœur</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="coups-de-coeur" class="filtres__toggle-input">
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+        </details>
+        
+        <div class="filtres__actions">
+          <button type="button" class="filtres__btn filtres__btn--reset">Reset</button>
+          <button type="submit" class="filtres__btn filtres__btn--apply">Appliquer</button>
+        </div>
+        
+      </form>
+    </aside>
+
+    <!-- Catalogue à droite -->
+    <main class="catalogue">
+    <h2 class="catalogue__titre">Catalogue des enchères</h2>
+
+    <section class="grille-produits">
+
+      <article class="carte-produit">
+        <div class="carte-produit__image-container">
+          <img class="carte-produit__image img-card" src="public/assets/img/albert1.webp" alt="Albert Ier - Belgique" />
+        </div>
+        <div class="carte-produit__contenu">
+          <h3 class="carte-produit__titre">Albert Ier</h3>
+          <ul class="carte-produit__infos">
+            <li>Pays : Belgique</li>
+            <li>Année : 1922</li>
+            <li>État : Très bon</li>
+            <li>Prix : $35</li>
+            <li>Fin : 3 juillet – 15:30</li>
+          </ul>
+          <a href="detail.html" class="carte-produit__btn">Voir détails</a>
+        </div>
+      </article>
+
+      <article class="carte-produit">
+        <div class="carte-produit__image-container">
+          <img class="carte-produit__image img-card" src="public/assets/img/maple_leaf.webp" alt="Maple Leaf - Canada" />
+        </div>
+        <div class="carte-produit__contenu">
+          <h3 class="carte-produit__titre">Maple Leaf</h3>
+          <ul class="carte-produit__infos">
+            <li>Pays : Canada</li>
+            <li>Année : 1897</li>
+            <li>État : Neuf</li>
+            <li>Prix : $350</li>
+            <li>Fin : 18 juillet – 17:00</li>
+          </ul>
+          <button class="carte-produit__btn">Enchérir</button>
+        </div>
+      </article>
+
+      <article class="carte-produit">
+        <div class="carte-produit__image-container">
+          <img class="carte-produit__image img-card" src="public/assets/img/marianne.webp" alt="Marianne l'engagée - France" />
+        </div>
+        <div class="carte-produit__contenu">
+          <h3 class="carte-produit__titre">Marianne l'engagée</h3>
+          <ul class="carte-produit__infos">
+            <li>Pays : France</li>
+            <li>Année : 2008</li>
+            <li>État : Utilisé</li>
+            <li>Prix : $12</li>
+            <li>Fin : 22 juillet – 12:00</li>
+          </ul>
+          <button class="carte-produit__btn">Enchérir</button>
+        </div>
+      </article>
+
+      <article class="carte-produit">
+        <div class="carte-produit__image-container">
+          <img class="carte-produit__image img-card" src="public/assets/img/mao.webp" alt="Mao Zedong - Chine" />
+        </div>
+        <div class="carte-produit__contenu">
+          <h3 class="carte-produit__titre">Mao Zedong</h3>
+          <ul class="carte-produit__infos">
+            <li>Pays : Chine</li>
+            <li>Année : 1967</li>
+            <li>État : Bon</li>
+            <li>Prix : $480</li>
+            <li>Fin : 4 juillet – 18:00</li>
+          </ul>
+          <button class="carte-produit__btn">Enchérir</button>
+        </div>
+      </article>
+
+      <article class="carte-produit">
+        <div class="carte-produit__image-container">
+          <img class="carte-produit__image img-card" src="public/assets/img/gandhi.webp" alt="Mahatma Gandhi - Inde" />
+        </div>
+        <div class="carte-produit__contenu">
+          <h3 class="carte-produit__titre">Mahatma Gandhi</h3>
+          <ul class="carte-produit__infos">
+            <li>Pays : Inde</li>
+            <li>Année : 1948</li>
+            <li>État : Très bon</li>
+            <li>Prix : $950</li>
+            <li>Fin : 5 juillet – 11:00</li>
+          </ul>
+          <button class="carte-produit__btn">Enchérir</button>
+        </div>
+      </article>
+
+      <article class="carte-produit">
+        <div class="carte-produit__image-container">
+          <img class="carte-produit__image img-card" src="public/assets/img/Che-guevara.webp" alt="Che Guevara - Cuba" />
+        </div>
+        <div class="carte-produit__contenu">
+          <h3 class="carte-produit__titre">Che Guevara</h3>
+          <ul class="carte-produit__infos">
+            <li>Pays : Cuba</li>
+            <li>Année : 1967</li>
+            <li>État : Excellent</li>
+            <li>Prix : $620</li>
+            <li>Fin : 6 juillet – 20:45</li>
+          </ul>
+          <button class="carte-produit__btn">Enchérir</button>
+        </div>
+      </article>
+    </section>
+
+    </main>
+  </div>
+
+  <!-- Pied de page -->
+  <footer class="footer">
+  <div class="footer__contenu">
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Navigation</h3>
+      <ul class="footer__liste">
+        <li>Accueil</li>
+        <li>Enchères</li>
+        <li>Archives</li>
+        <li>À propos</li>
+        <li>Profil</li>
+        <li>Aide</li>
+      </ul>
+    </div>
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Informations</h3>
+      <ul class="footer__liste">
+        <li>Fonctionnement de la plateforme</li>
+        <li>Conditions générales</li>
+        <li>Politique de confidentialité</li>
+        <li>À propos de Lord Stampee</li>
+      </ul>
+    </div>
+
+    <div class="footer__logo footer__colonne">
+      <img src="public/assets/img/logo.svg" alt="Logo Lord Stampee" />
+    </div>
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Contactez-nous</h3>
+      <ul class="footer__liste">
+        <li>Angleterre</li>
+        <li>Canada</li>
+        <li>US</li>
+        <li>Australie</li>
+        <li>
+          <span class="footer__icon">📧</span>
+          info@stampee.com
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Suivez-nous</h3>
+      <div class="footer__reseaux">
+        <img src="public/assets/img/facebook-svgrepo-com.svg" alt="Facebook" />
+        <img src="public/assets/img/instagram-svgrepo-com.svg" alt="Instagram" />
+        <img src="public/assets/img/twitter-svgrepo-com.svg" alt="Twitter" />
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="footer__ligne" />
+
+  <p class="footer__copyright">
+    &copy; 2025 Lord Stampee. Tous droits réservés
+  </p>  </footer>
+
+  <script src="public/assets/js/filtres.js"></script>
+</body>
+</html>
+

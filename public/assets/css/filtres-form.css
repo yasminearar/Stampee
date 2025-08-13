@@ -1,0 +1,185 @@
+/* filtres-form.css - Styles des formulaires et champs */
+
+/* Champs de formulaire compacts */
+.filtres__champ {
+  margin-bottom: 0.8rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.filtres__champ:last-child {
+  margin-bottom: 0;
+}
+
+.filtres__label {
+  display: block;
+  font-weight: 500;
+  color: var(--color-bleu-royal);
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filtres__input,
+.filtres__select {
+  width: auto;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--color-bleu-ardoise);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: var(--color-blanc);
+  color: var(--color-bleu-royal);
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.filtres__input:focus,
+.filtres__select:focus {
+  outline: none;
+  border-color: var(--color-bordeaux);
+  box-shadow: 0 0 0 3px rgba(124, 45, 38, 0.1);
+  transform: translateY(-1px);
+}
+
+.filtres__input--small {
+  width: auto;
+  min-width: 80px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  max-width: 120px;
+}
+
+/* Ranges avec design moderne */
+.filtres__range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filtres__separator {
+  color: var(--color-bordeaux);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* Radio buttons élégants */
+.filtres__radio-groupe {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.filtres__radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.filtres__radio-label:hover {
+  background-color: rgba(124, 45, 38, 0.05);
+}
+
+.filtres__radio {
+  margin-right: 0.5rem;
+  accent-color: var(--color-bordeaux);
+  transform: scale(1.1);
+}
+
+.filtres__radio-texte {
+  font-size: 0.85rem;
+  color: var(--color-bleu-royal);
+}
+
+/* Toggle switches minimalistes */
+.filtres__toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.filtres__toggle-input {
+  display: none;
+}
+
+.filtres__toggle-slider {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  background-color: var(--color-bleu-ardoise);
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filtres__toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-blanc);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filtres__toggle-input:checked + .filtres__toggle-slider {
+  background-color: var(--color-bordeaux);
+}
+
+.filtres__toggle-input:checked + .filtres__toggle-slider::before {
+  transform: translateX(20px);
+}
+
+/* Boutons d'action stylés */
+.filtres__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(94, 115, 131, 0.3);
+}
+
+.filtres__btn {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', sans-serif;
+}
+
+.filtres__btn--reset {
+  background-color: var(--color-bleu-ardoise);
+  color: var(--color-blanc);
+}
+
+.filtres__btn--reset:hover {
+  background-color: var(--color-bleu-royal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(94, 115, 131, 0.3);
+}
+
+.filtres__btn--apply {
+  background-color: var(--color-bordeaux);
+  color: var(--color-blanc);
+}
+
+.filtres__btn--apply:hover {
+  background-color: var(--color-bouton-rouge);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 45, 38, 0.3);
+}

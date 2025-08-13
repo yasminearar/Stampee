@@ -1,0 +1,98 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}Inscription – Stampee{% endblock %}
+
+{% block description %}Créez votre compte sur Lord Stampee - Plateforme d'enchères de timbres rares et d'exception. Rejoignez notre communauté d'enchérisseurs et collectionneurs de timbres.{% endblock %}
+
+{% block content %}
+<div class="fiche-timbre" style="max-width: 900px; margin: 0 auto;">
+  <section class="fiche-timbre__contenu">
+    <header class="fiche-timbre__entete" style="text-align: center;">
+      <h1 class="fiche-timbre__titre">Création de compte</h1>
+      <p class="page-description">Rejoignez la communauté Lord Stampee pour participer aux enchères de timbres rares et d'exception.</p>
+    </header>
+
+    <form class="filtres__formulaire" style="max-width: 700px; margin: 0 auto;" method="POST" action="{{ BASE }}/register">
+      <!-- Section Informations personnelles -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Informations personnelles</summary>
+        
+        <div class="filtres__champ">
+          <label for="prenom" class="filtres__label">Prénom</label>
+          <input type="text" id="prenom" name="prenom" class="filtres__input" required>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="email" class="filtres__label">Email</label>
+          <input type="email" id="email" name="email" class="filtres__input" required>
+        </div>
+        
+      </details>
+      
+      <!-- Section Compte -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Informations de connexion</summary>
+        
+        <div class="filtres__champ">
+          <label for="nom_utilisateur" class="filtres__label">Nom d'utilisateur</label>
+          <input type="text" id="nom_utilisateur" name="nom_utilisateur" class="filtres__input" required>
+          <small class="filtres__aide">Ce nom d'utilisateur doit être unique.</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="mot_de_passe" class="filtres__label">Mot de passe</label>
+          <input type="password" id="mot_de_passe" name="mot_de_passe" class="filtres__input" required>
+          <small class="filtres__aide">Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="confirmer-mot-de-passe" class="filtres__label">Confirmer le mot de passe</label>
+          <input type="password" id="confirmer-mot-de-passe" name="confirmer-mot-de-passe" class="filtres__input" required>
+        </div>
+      </details>
+      
+      <!-- Section Date d'inscription automatique -->
+      <input type="hidden" name="date_inscription" id="date_inscription" value="{{ "now"|date("Y-m-d H:i:s") }}">
+      
+      <!-- Conditions d'utilisation -->
+      <div class="filtres__champ" style="margin-top: 1.5rem; text-align: center;">
+        <label class="filtres__radio-label">
+          <input type="checkbox" name="conditions" required class="filtres__radio">
+          <span class="filtres__radio-texte">J'accepte les conditions d'utilisation et la politique de confidentialité</span>
+        </label>
+      </div>
+      
+      <!-- Bouton d'inscription -->
+      <div class="fiche-timbre__actions" style="margin-top: 2rem; text-align: center;">
+        <button type="submit" class="fiche-timbre__btn">Créer mon compte</button>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script>
+  // Script pour la validation du formulaire
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const password = document.getElementById('mot_de_passe');
+    const confirmPassword = document.getElementById('confirmer-mot-de-passe');
+    
+    form.addEventListener('submit', function(event) {
+      if (password.value !== confirmPassword.value) {
+        event.preventDefault();
+        alert('Les mots de passe ne correspondent pas.');
+      }
+      
+      // Validation du mot de passe
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+      if (!passwordRegex.test(password.value)) {
+        event.preventDefault();
+        alert('Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.');
+      }
+    });
+  });
+</script>
+{% endblock %}
