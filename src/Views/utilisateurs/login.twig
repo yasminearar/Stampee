@@ -1,0 +1,59 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}Connexion – Stampee{% endblock %}
+{% block description %}Connectez-vous à votre compte Lord Stampee pour accéder à vos enchères de timbres favoris, suivre vos offres et gérer votre collection.{% endblock %}
+
+{% block content %}
+<div class="fiche-timbre login-page">
+  <section class="fiche-timbre__contenu">
+    <header class="fiche-timbre__entete login-page__header">
+      <h1 class="fiche-timbre__titre">Connexion</h1>
+      <p class="login-page__description">Connectez-vous pour accéder à votre compte et participer aux enchères.</p>
+      
+      {% if session.user_id is defined %}
+        <div class="login-page__alert">
+          Vous êtes déjà connecté en tant que <strong>{{ session.user_name }}</strong>. 
+          <a href="{{ BASE }}/logout" class="login-page__alert-link">Se déconnecter</a>
+        </div>
+      {% endif %}
+    </header>
+
+    <form class="filtres__formulaire login-page__form" method="post" action="{{ BASE }}/login">
+      
+      <!-- Informations de connexion -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Informations de connexion</summary>
+        
+        <div class="filtres__champ">
+          <label for="username" class="filtres__label">Nom d'utilisateur</label>
+          <input type="text" id="username" name="username" class="filtres__input" required>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="password" class="filtres__label">Mot de passe</label>
+          <input type="password" id="password" name="password" class="filtres__input" required>
+        </div>
+
+        <div class="filtres__champ login-page__field-actions">
+          <a href="{{ BASE }}/mot-de-passe-oublie" class="login-page__forgot-password">Mot de passe oublié ?</a>
+        </div>
+      </details>
+      
+      <!-- Bouton de connexion -->
+      <div class="fiche-timbre__actions login-page__actions">
+        <button type="submit" class="fiche-timbre__btn">Se connecter</button>
+        <p class="fiche-timbre__info login-page__register-info">
+          Vous n'avez pas de compte ? 
+          <a href="{{ BASE }}/register" class="login-page__register-link">Créer un compte</a>
+        </p>
+      </div>
+    </form>
+
+    <!-- Lien de retour à l'accueil -->
+    <div class="fiche-timbre__info login-page__back-link">
+      <a href="{{ BASE }}/">Retour à la page d'accueil</a>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

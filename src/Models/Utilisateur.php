@@ -33,10 +33,13 @@ class Utilisateur {
         $sql = "SELECT u.*, p.role as privilege 
                 FROM {$this->table} u 
                 LEFT JOIN Privileges p ON u.privilege_id = p.privilege_id 
-                WHERE u.nom_utilisateur = :username OR u.email = :username";
+                WHERE u.nom_utilisateur = :username_param OR u.email = :email_param";
         
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(['username' => $username]);
+        $stmt->execute([
+            'username_param' => $username,
+            'email_param' => $username
+        ]);
         $user = $stmt->fetch();
         
         if ($user && password_verify($password, $user['mot_de_passe'])) {
@@ -235,6 +238,8 @@ class Utilisateur {
             return false;
         }
     }
+    
+    // Les méthodes liées au "se souvenir de moi" ont été supprimées car cette fonctionnalité n'est pas requise dans le devis
     
     /**
      * Test de connectivité à la base de données et de la structure de la table

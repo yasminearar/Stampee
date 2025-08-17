@@ -1,0 +1,32 @@
+/* ===================================
+   PAGE D'INSCRIPTION - REGISTER PAGE
+   =================================== */
+
+/* Container principal de la page d'inscription */
+.register-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Entête de la page d'inscription */
+.register-page__header {
+  text-align: center;
+}
+
+/* Formulaire d'inscription */
+.register-page__form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Section des conditions d'utilisation */
+.register-page__conditions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+/* Actions de la page d'inscription */
+.register-page__actions {
+  margin-top: 2rem;
+  text-align: center;
+}

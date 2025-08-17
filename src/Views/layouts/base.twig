@@ -23,33 +23,258 @@
         <span class="entete__slogan">Enchères de timbres d'exception</span>
       </div>
     </div>
+    
+    <div class="entete__centre">
+      <div class="entete__recherche">
+        <input type="search" placeholder="Rechercher des timbres, pays, années..." aria-label="Recherche" />
+        <button aria-label="Rechercher">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M10,2A8,8,0,1,1,2,10,8,8,0,0,1,10,2m0-2a10,10,0,1,0,10,10A10,10,0,0,0,10,0Z" />
+            <line x1="21" y1="21" x2="15" y2="15" stroke="#203843" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <div class="entete__actions">
+      <!-- Informations utiles -->
+      <div class="entete__info-rapide">
+        <div class="entete__encheres-actives">
+          <span class="entete__nombre">24</span>
+          <span class="entete__label">Enchères actives</span>
+        </div>
+        <div class="entete__temps-restant">
+          <span class="entete__compte-rebours">2h 15m</span>
+          <span class="entete__label">Prochaine clôture</span>
+        </div>
+      </div>
+      
+      <!-- Informations de contact compactes -->
+      <div class="entete__contact">
+        <div class="entete__telephone">
+          <svg class="entete__telephone-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#203843" viewBox="0 0 24 24">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+          <span>+1 (555) 123-STAMP</span>
+        </div>
+        <div class="entete__horaires">
+          <span>Lun-Ven 9h-18h</span>
+        </div>
+      </div>
+      
+      <!-- Actions utilisateur -->
+      <div class="entete__actions-utilisateur">
+        <!-- Sélecteur de langue -->
+        <button class="entete__action-btn" aria-label="Choisir la langue" title="Choisir la langue">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+          <span class="entete__action-text">FR</span>
+        </button>
+        
+        <!-- Favoris -->
+        <button class="entete__action-btn" aria-label="Mes favoris" title="Mes favoris">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span class="entete__badge">5</span>
+        </button>
+        
+        <!-- Notifications -->
+        <button class="entete__action-btn" aria-label="Notifications" title="Notifications">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+          </svg>
+          <span class="entete__notification-badge">3</span>
+        </button>
+        
+        <!-- Profil utilisateur -->
+        <div class="entete__profil">
+          <button id="compte-btn" class="entete__profil-btn" aria-label="Mon profil" title="Profil et historique">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <span class="entete__action-text">Mon compte</span>
+          </button>
+          
+          <!-- Popover du profil -->
+          <dialog id="compte-popover" class="compte-popover">
+            {% if session.user_id is defined %}
+              <div class="compte-popover__header">
+                <svg class="compte-popover__avatar" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#203843" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                <div class="compte-popover__user-info">
+                  <div class="compte-popover__username">{{ session.user_name }}</div>
+                  <div class="compte-popover__email">{{ session.user_email }}</div>
+                </div>
+              </div>
+              <div class="compte-popover__content">
+                <a href="{{ BASE }}/profil" class="compte-popover__link">
+                  <svg class="compte-popover__link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                  Mon profil
+                </a>
+                <a href="{{ BASE }}/encheres/mes-encheres" class="compte-popover__link">
+                  <svg class="compte-popover__link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/>
+                  </svg>
+                  Mes enchères
+                </a>
+                <a href="{{ BASE }}/favoris" class="compte-popover__link">
+                  <svg class="compte-popover__link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                  Mes favoris
+                </a>
+              </div>
+              <div class="compte-popover__footer">
+                <a href="{{ BASE }}/logout" class="compte-popover__logout">
+                  <svg class="compte-popover__logout-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                  </svg>
+                  Se déconnecter
+                </a>
+              </div>
+            {% else %}
+              <div class="compte-popover__content">
+                <a href="{{ BASE }}/login" class="compte-popover__link compte-popover__login">
+                  <svg class="compte-popover__link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+                  </svg>
+                  Se connecter
+                </a>
+                <a href="{{ BASE }}/register" class="compte-popover__link">
+                  <svg class="compte-popover__link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                  </svg>
+                  Créer un compte
+                </a>
+              </div>
+            {% endif %}
+          </dialog>
+        </div>
+      </div>
+    </div>
   </div>
   <hr class="entete__separateur" />
+
+  <nav class="entete__menu-principal">
+    <ul>
+      <li><a href="{{ BASE }}/">Accueil</a></li>
+      <li><a href="{{ BASE }}/encheres">Enchères</a></li>
+      <li><a href="{{ BASE }}/archives">Archives</a></li>
+      <li><a href="{{ BASE }}/apropos">À propos</a></li>
+      <li><a href="{{ BASE }}/profil">Profil</a></li>
+      <li><a href="{{ BASE }}/aide">Aide</a></li>
+    </ul>
+  </nav>
+
+  <nav class="entete__menu-secondaire">
+    <ul>
+      <li><a href="{{ BASE }}/apropos/lord-stampee">À propos de Lord Reginald Stampee III</a></li>
+      <li><a href="{{ BASE }}/actualites">Actualités</a></li>
+      {% if session.user_id is defined %}
+        <li><a href="{{ BASE }}/profil">Mon profil</a></li>
+        <li><a href="{{ BASE }}/fonctionnement">Fonctionnement de la plateforme</a></li>
+        <li><a href="{{ BASE }}/logout" class="entete__btn" style="color: white;">Se déconnecter</a></li>
+      {% else %}
+        <li><a href="{{ BASE }}/register">Devenir membre</a></li>
+        <li><a href="{{ BASE }}/fonctionnement">Fonctionnement de la plateforme</a></li>
+        <li><a href="{{ BASE }}/login" class="entete__btn" style="color: white;">Se connecter</a></li>
+      {% endif %}
+    </ul>
+  </nav>
 </header>
 
 <!-- Messages flash -->
 {% if flash_messages %}
 <div class="flash-messages">
   {% for message in flash_messages %}
-  <div class="flash-message flash-{{ message.type }}">
-    {{ message.message }}
-    <button class="close-flash">&times;</button>
+  <div class="flash-message flash-message--{{ message.type }}">
+    <div class="flash-message__content">
+      {% if message.type == 'success' %}
+        <svg class="flash-message__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+        </svg>
+      {% elseif message.type == 'error' %}
+        <svg class="flash-message__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+      {% elseif message.type == 'warning' %}
+        <svg class="flash-message__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+        </svg>
+      {% else %}
+        <svg class="flash-message__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+      {% endif %}
+      {{ message.message }}
+    </div>
+    <button class="flash-message__close" aria-label="Fermer">&times;</button>
   </div>
   {% endfor %}
 </div>
 {% endif %}
 
 <!-- Contenu principal -->
-<main class="contenu-principal">
-  {% block content %}{% endblock %}
-</main>
+{% block content %}{% endblock %}
 
 <!-- Pied de page -->
 <footer class="footer">
   <div class="footer__contenu">
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Navigation</h3>
+      <ul class="footer__liste">
+        <li>Accueil</li>
+        <li>Enchères</li>
+        <li>Archives</li>
+        <li>À propos</li>
+        <li>Profil</li>
+        <li>Aide</li>
+      </ul>
+    </div>
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Informations</h3>
+      <ul class="footer__liste">
+        <li>Fonctionnement de la plateforme</li>
+        <li>Conditions générales</li>
+        <li>Politique de confidentialité</li>
+        <li>À propos de Lord Stampee</li>
+      </ul>
+    </div>
+
     <div class="footer__logo footer__colonne">
       <img src="{{ ASSET }}assets/img/logo.svg" alt="Logo Lord Stampee" />
     </div>
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Contactez-nous</h3>
+      <ul class="footer__liste">
+        <li>Angleterre</li>
+        <li>Canada</li>
+        <li>US</li>
+        <li>Australie</li>
+        <li>
+          <span class="footer__icon">📧</span>
+          info@stampee.com
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__colonne">
+      <h3 class="footer__titre">Suivez-nous</h3>
+      <div class="footer__reseaux">
+        <img src="{{ ASSET }}assets/img/facebook-svgrepo-com.svg" alt="Facebook" />
+        <img src="{{ ASSET }}assets/img/instagram-svgrepo-com.svg" alt="Instagram" />
+        <img src="{{ ASSET }}assets/img/twitter-svgrepo-com.svg" alt="Twitter" />
+      </div>
+    </div>
+
   </div>
 
   <hr class="footer__ligne" />
@@ -60,17 +285,7 @@
 </footer>
 
 {% block scripts %}
-<script>
-  // Gestion des messages flash
-  document.addEventListener('DOMContentLoaded', function() {
-    const closeButtons = document.querySelectorAll('.close-flash');
-    closeButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        this.parentNode.remove();
-      });
-    });
-  });
-</script>
+<script src="{{ ASSET }}assets/js/app.js"></script>
 {% endblock %}
 
 </body>

@@ -389,6 +389,11 @@
   .entete__action-text {
     display: none;
   }
+
+  .compte-popover .compte-popover__link,
+  .compte-popover .compte-popover__logout {
+    display: flex;
+  }
   
   .entete__centre {
     max-width: 400px;

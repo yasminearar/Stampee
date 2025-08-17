@@ -15,7 +15,6 @@ class Controller {
         $loader = new FilesystemLoader('src/Views');
         $this->twig = new Environment($loader, [
             'cache' => false, // Désactiver le cache pour le développement
-            'debug' => true,  // Activer le mode debug
         ]);
         
         // Ajout de variables globales pour Twig

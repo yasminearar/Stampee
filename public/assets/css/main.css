@@ -10,6 +10,11 @@
 @import "layout-responsive.css";
 @import "grille-produits.css";
 @import "fiche-timbre.css";
+@import "flash-messages.css";
+@import "compte-popover.css";
+@import "dialog-popover.css";
+@import "login-page.css";
+@import "register-page.css";
 
 /* Règle universelle pour prévenir l'avertissement h1 dans les sections */
 section h1, article h1, aside h1, nav h1 {

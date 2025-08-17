@@ -28,7 +28,7 @@ class UtilisateurController extends Controller {
             return;
         }
         
-        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = filter_input(INPUT_POST, 'password');
         
         if (empty($username) || empty($password)) {
@@ -54,11 +54,24 @@ class UtilisateurController extends Controller {
             
             $this->addFlashMessage('Connexion réussie! Bienvenue ' . $authenticatedUser['prenom'], 'success');
             
+            // Rediriger vers la page d'accueil
             $this->redirect(BASE . '/');
         } else {
             $this->addFlashMessage('Nom d\'utilisateur ou mot de passe incorrect', 'error');
             $this->redirect(BASE . '/login');
         }
+    }
+    
+    /**
+     * Déconnecte l'utilisateur
+     */
+    public function logout() {
+        // Détruire la session
+        session_unset();
+        session_destroy();
+        
+        $this->addFlashMessage('Vous avez été déconnecté avec succès', 'success');
+        $this->redirect(BASE . '/login');
     }
     
     /**
@@ -81,8 +94,8 @@ class UtilisateurController extends Controller {
             return;
         }
         
-        $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
-        $username = filter_input(INPUT_POST, 'nom_utilisateur', FILTER_SANITIZE_STRING);
+        $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $username = filter_input(INPUT_POST, 'nom_utilisateur', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = filter_input(INPUT_POST, 'mot_de_passe');
         $passwordConfirm = filter_input(INPUT_POST, 'confirmer-mot-de-passe');

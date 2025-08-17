@@ -1,0 +1,122 @@
+/* ===== Page de connexion ===== */
+
+/* Conteneur principal de la page de connexion */
+.login-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.login-page__header {
+  text-align: center;
+}
+
+.login-page__description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Alert d'information pour utilisateur déjà connecté */
+.login-page__alert {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-radius: 5px;
+  border: 1px solid #bee5eb;
+}
+
+.login-page__alert-link {
+  color: #0c5460;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.login-page__alert-link:hover {
+  color: #085460;
+}
+
+/* Formulaire de connexion */
+.login-page__form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Actions dans le formulaire */
+.login-page__field-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.login-page__forgot-password {
+  color: #203843;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.login-page__forgot-password:hover {
+  color: #152830;
+  text-decoration: none;
+}
+
+/* Actions principales (boutons) */
+.login-page__actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.login-page__register-info {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.login-page__register-link {
+  color: #203843;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.login-page__register-link:hover {
+  color: #152830;
+  text-decoration: none;
+}
+
+/* Lien de retour */
+.login-page__back-link {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.login-page__back-link a {
+  color: #203843;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.login-page__back-link a:hover {
+  color: #152830;
+  text-decoration: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .login-page {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .login-page__form {
+    max-width: 100%;
+  }
+  
+  .login-page__field-actions {
+    justify-content: center;
+  }
+}

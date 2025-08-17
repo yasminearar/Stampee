@@ -1,0 +1,238 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}Catalogue des enchères – Stampee{% endblock %}
+{% block description %}Lord Stampee - Plateforme d'enchères de timbres rares et d'exception. Découvrez notre collection de timbres historiques authentifiés. Enchères en temps réel, expertise professionnelle. Albert Ier, Marianne, Gandhi et plus encore.{% endblock %}
+
+{% block content %}
+  <!-- Titre principal de la page -->
+  <h1 class="page-titre">Collection de timbres rares - Enchères Lord Stampee</h1>
+  <p class="page-description">Découvrez notre sélection exceptionnelle de timbres rares et historiques. Participez aux enchères en temps réel et enrichissez votre collection avec des pièces authentifiées par nos experts.</p>
+
+  <!-- Contenu principal avec layout côte à côte -->
+  <div class="contenu-principal">
+    
+    <!-- Filtres à gauche -->
+    <aside class="filtres">
+      <h2 class="filtres__titre">Filtres</h2>
+      
+      <form class="filtres__formulaire">
+        
+        <!-- Section Timbre -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Timbre</summary>
+          
+          <div class="filtres__champ">
+            <label for="nom-timbre" class="filtres__label">Nom</label>
+            <input type="text" id="nom-timbre" name="nom-timbre" class="filtres__input" placeholder="Rechercher...">
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Année</label>
+            <div class="filtres__range">
+              <input type="number" id="annee-min" name="annee-min" class="filtres__input filtres__input--small" placeholder="1840" min="1840" max="2025">
+              <span class="filtres__separator">-</span>
+              <input type="number" id="annee-max" name="annee-max" class="filtres__input filtres__input--small" placeholder="2025" min="1840" max="2025">
+            </div>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="pays-origine" class="filtres__label">Pays</label>
+            <select id="pays-origine" name="pays-origine" class="filtres__select">
+              <option value="">Tous</option>
+              <option value="france">France</option>
+              <option value="royaume-uni">Royaume-Uni</option>
+              <option value="canada">Canada</option>
+              <option value="allemagne">Allemagne</option>
+              <option value="usa">États-Unis</option>
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">État</label>
+            <div class="filtres__radio-groupe">
+              <label class="filtres__radio-label">
+                <input type="radio" name="condition" value="neuf" class="filtres__radio">
+                <span class="filtres__radio-texte">Neuf</span>
+              </label>
+              <label class="filtres__radio-label">
+                <input type="radio" name="condition" value="bon" class="filtres__radio">
+                <span class="filtres__radio-texte">Bon</span>
+              </label>
+              <label class="filtres__radio-label">
+                <input type="radio" name="condition" value="utilise" class="filtres__radio">
+                <span class="filtres__radio-texte">Utilisé</span>
+              </label>
+            </div>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Certifié</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="certifie" class="filtres__toggle-input">
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+        </details>
+        
+        <!-- Section Enchère -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Enchère</summary>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Actives seulement</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="actives-seulement" class="filtres__toggle-input" checked>
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Prix ($)</label>
+            <div class="filtres__range">
+              <input type="number" id="prix-min" name="prix-min" class="filtres__input filtres__input--small" placeholder="0" min="0">
+              <span class="filtres__separator">-</span>
+              <input type="number" id="prix-max" name="prix-max" class="filtres__input filtres__input--small" placeholder="5000" min="0">
+            </div>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="date-fin" class="filtres__label">Fin avant</label>
+            <input type="date" id="date-fin" name="date-fin" class="filtres__input">
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Coups de cœur</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="coups-de-coeur" class="filtres__toggle-input">
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+        </details>
+        
+        <div class="filtres__actions">
+          <button type="button" class="filtres__btn filtres__btn--reset">Reset</button>
+          <button type="submit" class="filtres__btn filtres__btn--apply">Appliquer</button>
+        </div>
+        
+      </form>
+    </aside>
+
+    <!-- Catalogue à droite -->
+    <main class="catalogue">
+      <h2 class="catalogue__titre">Catalogue des enchères</h2>
+
+      <section class="grille-produits">
+        <article class="carte-produit">
+          <div class="carte-produit__image-container">
+            <img class="carte-produit__image img-card" src="{{ ASSET }}assets/img/albert1.webp" alt="Albert Ier - Belgique" />
+          </div>
+          <div class="carte-produit__contenu">
+            <h3 class="carte-produit__titre">Albert Ier</h3>
+            <ul class="carte-produit__infos">
+              <li>Pays : Belgique</li>
+              <li>Année : 1922</li>
+              <li>État : Très bon</li>
+              <li>Prix : $35</li>
+              <li>Fin : 3 juillet – 15:30</li>
+            </ul>
+            <a href="{{ BASE }}/detail.html" class="carte-produit__btn">Voir détails</a>
+          </div>
+        </article>
+
+        <article class="carte-produit">
+          <div class="carte-produit__image-container">
+            <img class="carte-produit__image img-card" src="{{ ASSET }}assets/img/maple_leaf.webp" alt="Maple Leaf - Canada" />
+          </div>
+          <div class="carte-produit__contenu">
+            <h3 class="carte-produit__titre">Maple Leaf</h3>
+            <ul class="carte-produit__infos">
+              <li>Pays : Canada</li>
+              <li>Année : 1897</li>
+              <li>État : Neuf</li>
+              <li>Prix : $350</li>
+              <li>Fin : 18 juillet – 17:00</li>
+            </ul>
+            <button class="carte-produit__btn">Enchérir</button>
+          </div>
+        </article>
+
+        <article class="carte-produit">
+          <div class="carte-produit__image-container">
+            <img class="carte-produit__image img-card" src="{{ ASSET }}assets/img/marianne.webp" alt="Marianne l'engagée - France" />
+          </div>
+          <div class="carte-produit__contenu">
+            <h3 class="carte-produit__titre">Marianne l'engagée</h3>
+            <ul class="carte-produit__infos">
+              <li>Pays : France</li>
+              <li>Année : 2008</li>
+              <li>État : Utilisé</li>
+              <li>Prix : $12</li>
+              <li>Fin : 22 juillet – 12:00</li>
+            </ul>
+            <button class="carte-produit__btn">Enchérir</button>
+          </div>
+        </article>
+
+        <article class="carte-produit">
+          <div class="carte-produit__image-container">
+            <img class="carte-produit__image img-card" src="{{ ASSET }}assets/img/mao.webp" alt="Mao Zedong - Chine" />
+          </div>
+          <div class="carte-produit__contenu">
+            <h3 class="carte-produit__titre">Mao Zedong</h3>
+            <ul class="carte-produit__infos">
+              <li>Pays : Chine</li>
+              <li>Année : 1967</li>
+              <li>État : Bon</li>
+              <li>Prix : $480</li>
+              <li>Fin : 4 juillet – 18:00</li>
+            </ul>
+            <button class="carte-produit__btn">Enchérir</button>
+          </div>
+        </article>
+
+        <article class="carte-produit">
+          <div class="carte-produit__image-container">
+            <img class="carte-produit__image img-card" src="{{ ASSET }}assets/img/gandhi.webp" alt="Mahatma Gandhi - Inde" />
+          </div>
+          <div class="carte-produit__contenu">
+            <h3 class="carte-produit__titre">Mahatma Gandhi</h3>
+            <ul class="carte-produit__infos">
+              <li>Pays : Inde</li>
+              <li>Année : 1948</li>
+              <li>État : Très bon</li>
+              <li>Prix : $950</li>
+              <li>Fin : 5 juillet – 11:00</li>
+            </ul>
+            <button class="carte-produit__btn">Enchérir</button>
+          </div>
+        </article>
+
+        <article class="carte-produit">
+          <div class="carte-produit__image-container">
+            <img class="carte-produit__image img-card" src="{{ ASSET }}assets/img/Che-guevara.webp" alt="Che Guevara - Cuba" />
+          </div>
+          <div class="carte-produit__contenu">
+            <h3 class="carte-produit__titre">Che Guevara</h3>
+            <ul class="carte-produit__infos">
+              <li>Pays : Cuba</li>
+              <li>Année : 1967</li>
+              <li>État : Excellent</li>
+              <li>Prix : $620</li>
+              <li>Fin : 6 juillet – 20:45</li>
+            </ul>
+            <button class="carte-produit__btn">Enchérir</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+{% endblock %}
+
+{% block styles %}
+<!-- Assurez-vous que tous les styles nécessaires sont chargés -->
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script src="{{ ASSET }}assets/js/filtres.js"></script>
+{% endblock %}

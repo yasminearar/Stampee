@@ -1,0 +1,114 @@
+/* Styles pour le popover du compte utilisateur */
+.entete__profil {
+  position: relative;
+}
+
+.compte-popover {
+  display: none;
+  position: absolute !important;
+  top: 100% !important;
+  right: 0 !important;
+  width: 280px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.compte-popover__header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.compte-popover__avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.compte-popover__user-info {
+  margin-left: 12px;
+}
+
+.compte-popover__username {
+  font-weight: 600;
+  color: #203843;
+  font-size: 16px;
+}
+
+.compte-popover__email {
+  color: #666;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.compte-popover__content {
+  padding: 10px 0;
+}
+
+.compte-popover__link {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: #203843;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.compte-popover__link:hover {
+  background-color: #f5f5f5;
+}
+
+.compte-popover__link-icon {
+  margin-right: 10px;
+}
+
+.compte-popover__footer {
+  border-top: 1px solid #e0e0e0;
+  padding: 10px 0;
+}
+
+.compte-popover__logout {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: #e53935;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.compte-popover__logout:hover {
+  background-color: #ffebee;
+}
+
+.compte-popover__logout-icon {
+  margin-right: 10px;
+}
+
+.compte-popover__login {
+  color: #2196f3;
+  font-weight: 500;
+}
+
+.compte-popover--visible {
+  display: block !important;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .compte-popover {
+    width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .compte-popover {
+    width: 230px;
+    right: -15px !important;
+  }
+}
