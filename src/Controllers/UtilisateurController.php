@@ -12,10 +12,13 @@ class UtilisateurController extends Controller {
      * Affiche le formulaire de connexion
      */
     public function login() {
+        $redirectUrl = $_GET['redirect'] ?? '';
+        
         $this->render('utilisateurs/login.twig', [
             'pageTitle' => 'Connexion',
             'BASE' => BASE,
-            'ASSET' => ASSET
+            'ASSET' => ASSET,
+            'redirectUrl' => $redirectUrl
         ]);
     }
     
@@ -54,8 +57,9 @@ class UtilisateurController extends Controller {
             
             $this->addFlashMessage('Connexion réussie! Bienvenue ' . $authenticatedUser['prenom'], 'success');
             
-            // Rediriger vers la page d'accueil
-            $this->redirect(BASE . '/');
+            // Gérer la redirection après connexion
+            $redirectUrl = filter_input(INPUT_POST, 'redirect', FILTER_SANITIZE_URL) ?: ($_GET['redirect'] ?? BASE . '/');
+            $this->redirect($redirectUrl);
         } else {
             $this->addFlashMessage('Nom d\'utilisateur ou mot de passe incorrect', 'error');
             $this->redirect(BASE . '/login');

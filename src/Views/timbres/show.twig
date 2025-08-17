@@ -1,0 +1,134 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}{{ title }} – Stampee{% endblock %}
+
+{% block description %}Découvrez les détails de {{ timbre.nom }} sur Lord Stampee - Plateforme d'enchères de timbres rares et d'exception.{% endblock %}
+
+{% block content %}
+<!-- Contenu principal -->
+<main class="contenu-principal">
+  <div class="fiche-timbre">
+    <!-- Navigation de retour -->
+    <div class="fiche-timbre__navigation">
+      <a href="{{ BASE }}/Stampee/timbres" class="fiche-timbre__retour">
+        ← Retour au catalogue
+      </a>
+    </div>
+
+    <!-- Bloc gauche : image principale + miniatures -->
+    <section class="fiche-timbre__media">
+      <div class="fiche-timbre__image-principale">
+        {% if images|length > 0 %}
+          <img src="{{ ASSET }}{{ images[0].url_image }}" alt="{{ timbre.nom }}" id="image-principale">
+        {% else %}
+          <div class="fiche-timbre__placeholder-detail">
+            <span>📮</span>
+            <p>Aucune image disponible</p>
+          </div>
+        {% endif %}
+      </div>
+      
+      {% if images|length > 1 %}
+        <div class="fiche-timbre__miniatures">
+          {% for image in images %}
+            <button class="fiche-timbre__miniature {{ loop.first ? 'fiche-timbre__miniature--active' : '' }}" 
+                    data-image="{{ ASSET }}{{ image.url_image }}">
+              <img src="{{ ASSET }}{{ image.url_image }}" alt="{{ loop.first ? 'Vue principale' : 'Vue alternative ' ~ loop.index }}">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </section>
+
+    <!-- Bloc droit : titre, détails, description, bouton -->
+    <section class="fiche-timbre__contenu">
+      <header class="fiche-timbre__entete">
+        <h1 class="fiche-timbre__titre">{{ timbre.nom }}</h1>
+        <p class="fiche-timbre__meta">
+          {% if timbre.certifié %}
+            <span class="fiche-timbre__certifie-indicateur">✓</span>
+            <span class="fiche-timbre__certifie-texte">CERTIFIÉ</span>
+          {% endif %}
+          <span class="fiche-timbre__date-ajout">Ajouté le {{ timbre.date_creation|date('d/m/Y') }}</span>
+        </p>
+      </header>
+
+      <div class="fiche-timbre__details">
+        <h2 class="fiche-timbre__sous-titre">Détails du timbre</h2>
+        
+        {% if timbre.nom_pays %}
+          <div class="fiche-timbre__ligne">
+            <span class="fiche-timbre__label">Pays d'origine :</span>
+            <span class="fiche-timbre__valeur">{{ timbre.nom_pays }}</span>
+          </div>
+        {% endif %}
+        
+        {% if timbre.nom_couleur %}
+          <div class="fiche-timbre__ligne">
+            <span class="fiche-timbre__label">Couleur principale :</span>
+            <span class="fiche-timbre__valeur">{{ timbre.nom_couleur }}</span>
+          </div>
+        {% endif %}
+        
+        {% if timbre.nom_condition %}
+          <div class="fiche-timbre__ligne">
+            <span class="fiche-timbre__label">État :</span>
+            <span class="fiche-timbre__valeur">{{ timbre.nom_condition }}</span>
+          </div>
+        {% endif %}
+        
+        {% if timbre.dimensions %}
+          <div class="fiche-timbre__ligne">
+            <span class="fiche-timbre__label">Dimensions :</span>
+            <span class="fiche-timbre__valeur">{{ timbre.dimensions }}</span>
+          </div>
+        {% endif %}
+        
+        {% if timbre.tirage %}
+          <div class="fiche-timbre__ligne">
+            <span class="fiche-timbre__label">Tirage :</span>
+            <span class="fiche-timbre__valeur">{{ timbre.tirage|number_format }} exemplaires</span>
+          </div>
+        {% endif %}
+        
+        <div class="fiche-timbre__ligne">
+          <span class="fiche-timbre__label">Certification :</span>
+          <span class="fiche-timbre__valeur {{ timbre.certifié ? 'fiche-timbre__valeur--important' : '' }}">
+            {{ timbre.certifié ? 'Timbre certifié authentique' : 'Non certifié' }}
+          </span>
+        </div>
+        
+        <div class="fiche-timbre__ligne">
+          <span class="fiche-timbre__label">Date d'ajout :</span>
+          <span class="fiche-timbre__valeur">{{ timbre.date_creation|date('d/m/Y à H:i') }}</span>
+        </div>
+        
+        {% if timbre.nom_utilisateur %}
+          <div class="fiche-timbre__ligne">
+            <span class="fiche-timbre__label">Ajouté par :</span>
+            <span class="fiche-timbre__valeur">{{ timbre.nom_utilisateur }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      {% if timbre.description %}
+        <div class="fiche-timbre__description">
+          <h2 class="fiche-timbre__sous-titre">Description</h2>
+          <div class="fiche-timbre__description-contenu">
+            {{ timbre.description|nl2br }}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="fiche-timbre__actions">
+        <a href="{{ BASE }}/Stampee/timbres" class="fiche-timbre__btn-retour">
+          <svg class="fiche-timbre__btn-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
+          Retour au catalogue
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

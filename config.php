@@ -3,7 +3,6 @@ define('BASE', '/Stampee');
 define('ASSET', '/Stampee/public/');
 define('ROOT_DIR', __DIR__);
 define('SITE_NAME', 'Lord Stampee');
-define('DEBUG', true);
 
 // Configuration de la base de données
 define('DB_HOST', 'localhost');

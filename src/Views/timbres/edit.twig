@@ -1,0 +1,128 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}{{ title }} – Stampee{% endblock %}
+
+{% block description %}Modifiez votre timbre sur Lord Stampee - Plateforme d'enchères de timbres rares et d'exception.{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<div class="fiche-timbre add-timbre-page">
+  <section class="fiche-timbre__contenu">
+    <header class="fiche-timbre__entete add-timbre-page__header">
+      <h1 class="fiche-timbre__titre">Modifier le timbre</h1>
+      <p class="page-description">Modifiez les informations de votre timbre.</p>
+    </header>
+
+    {% if errors %}
+      <div class="flash-messages">
+        {% for field, error in errors %}
+          <div class="flash-messages__item flash-messages__item--error">
+            {{ error }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form class="filtres__formulaire add-timbre-page__form" method="POST" action="{{ BASE }}/Stampee/timbres/{{ timbre.timbre_id }}/update" enctype="multipart/form-data">
+      
+      <!-- Section Informations principales -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Informations principales</summary>
+        
+        <div class="filtres__champ">
+          <label for="nom" class="filtres__label">Nom du timbre *</label>
+          <input type="text" id="nom" name="nom" class="filtres__input" required value="{{ timbre.nom }}">
+          <small class="filtres__aide">Donnez un nom descriptif à votre timbre.</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="description" class="filtres__label">Description</label>
+          <textarea id="description" name="description" class="filtres__input add-timbre-page__textarea" rows="4">{{ timbre.description }}</textarea>
+          <small class="filtres__aide">Décrivez les particularités de votre timbre.</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label class="filtres__radio-label">
+            <input type="checkbox" name="certifie" class="filtres__radio" {{ timbre.certifié ? 'checked' : '' }}>
+            <span class="filtres__radio-texte">Timbre certifié</span>
+          </label>
+          <small class="filtres__aide">Cochez si ce timbre a été certifié par un expert.</small>
+        </div>
+      </details>
+
+      <!-- Section Caractéristiques -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Caractéristiques</summary>
+        
+        <div class="filtres__row">
+          <div class="filtres__champ">
+            <label for="couleur" class="filtres__label">Couleur *</label>
+            <select id="couleur" name="couleur_id" class="filtres__input" required>
+              <option value="">Sélectionnez une couleur</option>
+              {% for couleur in couleurs %}
+                <option value="{{ couleur.couleur_id }}" {{ timbre.couleur_id == couleur.couleur_id ? 'selected' : '' }}>
+                  {{ couleur.nom_couleur }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="pays" class="filtres__label">Pays/Territoire *</label>
+            <select id="pays" name="pays_id" class="filtres__input" required>
+              <option value="">Sélectionnez un pays</option>
+              {% for pays in pays %}
+                <option value="{{ pays.pays_id }}" {{ timbre.pays_id == pays.pays_id ? 'selected' : '' }}>
+                  {{ pays.nom_pays }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="filtres__row">
+          <div class="filtres__champ">
+            <label for="condition" class="filtres__label">Condition *</label>
+            <select id="condition" name="condition_id" class="filtres__input" required>
+              <option value="">Sélectionnez une condition</option>
+              {% for condition in conditions %}
+                <option value="{{ condition.condition_id }}" {{ timbre.condition_id == condition.condition_id ? 'selected' : '' }}>
+                  {{ condition.nom_condition }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="dimensions" class="filtres__label">Dimensions (mm)</label>
+            <input type="text" id="dimensions" name="dimensions" class="filtres__input" placeholder="ex: 25x30" value="{{ timbre.dimensions }}">
+            <small class="filtres__aide">Format: largeur x hauteur en millimètres</small>
+          </div>
+        </div>
+
+        <div class="filtres__row">
+          <div class="filtres__champ">
+            <label for="tirage" class="filtres__label">Tirage</label>
+            <input type="number" id="tirage" name="tirage" class="filtres__input" min="1" value="{{ timbre.tirage }}">
+            <small class="filtres__aide">Nombre d'exemplaires émis (si connu)</small>
+          </div>
+        </div>
+      </details>
+
+      <div class="filtres__actions">
+        <button type="submit" class="filtres__btn filtres__btn--principal">
+          Mettre à jour le timbre
+        </button>
+        <a href="{{ BASE }}/Stampee/timbres/{{ timbre.timbre_id }}" class="filtres__btn filtres__btn--secondaire">
+          Annuler
+        </a>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -6,6 +6,7 @@
   <meta name="description" content="{% block description %}Plateforme d'enchères de timbres rares et d'exception{% endblock %}">
   <title>{% block title %}Lord Stampee{% endblock %}</title>
   <link rel="stylesheet" href="{{ ASSET }}assets/css/main.css" />
+  <link rel="stylesheet" href="{{ ASSET }}assets/css/timbre-actions.css" />
   
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -162,12 +163,36 @@
 
   <nav class="entete__menu-principal">
     <ul>
-      <li><a href="{{ BASE }}/">Accueil</a></li>
-      <li><a href="{{ BASE }}/encheres">Enchères</a></li>
-      <li><a href="{{ BASE }}/archives">Archives</a></li>
-      <li><a href="{{ BASE }}/apropos">À propos</a></li>
-      <li><a href="{{ BASE }}/profil">Profil</a></li>
-      <li><a href="{{ BASE }}/aide">Aide</a></li>
+      <li><a href="{{ BASE }}/" class="{{ '/' == app.request.pathInfo ? 'entete__menu-link--active' : '' }}">
+        <svg class="entete__menu-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          <path d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+        </svg>
+        Accueil
+      </a></li>
+      <li><a href="{{ BASE }}/timbres" class="{{ '/timbres' in app.request.pathInfo ? 'entete__menu-link--active' : '' }}">
+        <svg class="entete__menu-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M2.5 0A1.5 1.5 0 0 0 1 1.5v13A1.5 1.5 0 0 0 2.5 16h11a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 13.5 0h-11zM2 1.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-13z"/>
+          <path d="M4.5 6a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        Timbres
+        {% if session.user_id is not defined %}
+          <svg class="entete__menu-lock" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+          </svg>
+        {% endif %}
+      </a></li>
+      <li><a href="{{ BASE }}/encheres" class="{{ '/encheres' in app.request.pathInfo ? 'entete__menu-link--active' : '' }}">
+        <svg class="entete__menu-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M6 9a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H6.5A.5.5 0 0 1 6 9zM3.854 4.146a.5.5 0 1 0-.708.708L4.793 6.5 3.146 8.146a.5.5 0 1 0 .708.708l2-2a.5.5 0 0 0 0-.708l-2-2z"/>
+          <path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12z"/>
+        </svg>
+        Enchères
+      </a></li>
+      <li><a href="{{ BASE }}/archives" class="{{ '/archives' in app.request.pathInfo ? 'entete__menu-link--active' : '' }}">Archives</a></li>
+      <li><a href="{{ BASE }}/apropos" class="{{ '/apropos' in app.request.pathInfo ? 'entete__menu-link--active' : '' }}">À propos</a></li>
+      <li><a href="{{ BASE }}/profil" class="{{ '/profil' in app.request.pathInfo ? 'entete__menu-link--active' : '' }}">Profil</a></li>
+      <li><a href="{{ BASE }}/aide" class="{{ '/aide' in app.request.pathInfo ? 'entete__menu-link--active' : '' }}">Aide</a></li>
     </ul>
   </nav>
 
@@ -286,6 +311,7 @@
 
 {% block scripts %}
 <script src="{{ ASSET }}assets/js/app.js"></script>
+<script src="{{ ASSET }}assets/js/timbre-detail.js"></script>
 {% endblock %}
 
 </body>

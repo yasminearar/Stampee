@@ -18,7 +18,10 @@
       {% endif %}
     </header>
 
-    <form class="filtres__formulaire login-page__form" method="post" action="{{ BASE }}/login">
+    <form class="filtres__formulaire login-page__form" method="post" action="{{ BASE }}/login{% if redirectUrl %}?redirect={{ redirectUrl|url_encode }}{% endif %}">
+      {% if redirectUrl %}
+        <input type="hidden" name="redirect" value="{{ redirectUrl }}">
+      {% endif %}
       
       <!-- Informations de connexion -->
       <details class="filtres__section" open>

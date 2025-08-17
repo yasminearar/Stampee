@@ -1,0 +1,225 @@
+/* ===================================
+   CATALOGUE DES TIMBRES - CATALOGUE PAGE
+   =================================== */
+
+/* En-tête du catalogue inline */
+.catalogue__header-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.catalogue__pagination-info {
+  font-size: 0.9rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Extensions pour les filtres */
+.filtres__section-add {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.filtres__btn-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.filtres__btn-add:hover {
+  background-color: #218838;
+  color: white;
+  text-decoration: none;
+}
+
+.filtres__btn-add-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Placeholder pour image manquante dans les cartes */
+.carte-produit__placeholder-small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 200px;
+  background-color: #f8f9fa;
+  color: #6c757d;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+}
+
+/* Badge certifié pour les cartes */
+.carte-produit__badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  z-index: 2;
+}
+
+.carte-produit__badge--certified {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Description dans les cartes */
+.carte-produit__description {
+  font-size: 0.9rem;
+  color: #6c757d;
+  line-height: 1.4;
+  margin: 0.5rem 0;
+}
+
+/* Actions pour l'état vide */
+.catalogue__empty-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* Pagination du catalogue */
+.catalogue__pagination {
+  margin-top: 3rem;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+}
+
+.pagination__lien {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: #007bff;
+  text-decoration: none;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.pagination__lien:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination__pages {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0 1rem;
+}
+
+.pagination__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #007bff;
+  text-decoration: none;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.pagination__page:hover {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination__page--current {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  font-weight: bold;
+  cursor: default;
+}
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #6c757d;
+}
+
+/* État vide du catalogue */
+.catalogue__empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.catalogue__empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.6;
+}
+
+.catalogue__empty-title {
+  font-size: 1.5rem;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.catalogue__empty-text {
+  color: #6c757d;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .catalogue__header-inline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .pagination__pages {
+    margin: 0 0.5rem;
+  }
+  
+  .catalogue__empty-actions {
+    flex-direction: column;
+  }
+  
+  .catalogue__empty-actions .fiche-timbre__btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}

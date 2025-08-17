@@ -1,0 +1,297 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}{{ title }} – Stampee{% endblock %}
+
+{% block description %}Découvrez notre catalogue de timbres rares et d'exception sur Lord Stampee - Plateforme d'enchères de timbres de collection.{% endblock %}
+
+{% block styles %}
+{{ parent() }}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<!-- Styles carte produit optimisé pour Swiper -->
+<link rel="stylesheet" href="{{ ASSET }}assets/css/carte-produit-swiper.css" />
+{% endblock %}
+
+{% block content %}
+  <!-- Titre principal de la page -->
+  <h1 class="page-titre">Catalogue des Timbres</h1>
+  <p class="page-description">
+    Découvrez notre collection de {{ totalTimbres }} timbre{{ totalTimbres > 1 ? 's' : '' }} rare{{ totalTimbres > 1 ? 's' : '' }} et d'exception. 
+    Explorez des pièces authentifiées par nos collectionneurs.
+  </p>
+
+  <!-- Contenu principal avec layout côte à côte -->
+  <div class="contenu-principal">
+    
+    <!-- Filtres à gauche -->
+    <aside class="filtres">
+      <h2 class="filtres__titre">Filtres</h2>
+      
+      <form class="filtres__formulaire" method="GET" action="{{ BASE }}/timbres">
+        
+        <!-- Section Recherche -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Recherche</summary>
+          
+          <div class="filtres__champ">
+            <label for="nom-timbre" class="filtres__label">Nom du timbre</label>
+            <input type="text" id="nom-timbre" name="search" class="filtres__input" placeholder="Rechercher..." value="{{ app.request.get('search') }}">
+          </div>
+        </details>
+        
+        <!-- Section Caractéristiques -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Caractéristiques</summary>
+          
+          <div class="filtres__champ">
+            <label for="pays-origine" class="filtres__label">Pays d'origine</label>
+            <select id="pays-origine" name="pays_id" class="filtres__select">
+              <option value="">Tous les pays</option>
+              {% for pays_item in pays %}
+                <option value="{{ pays_item.pays_id }}" {{ app.request.get('pays_id') == pays_item.pays_id ? 'selected' : '' }}>
+                  {{ pays_item.nom_pays }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="couleur" class="filtres__label">Couleur</label>
+            <select id="couleur" name="couleur_id" class="filtres__select">
+              <option value="">Toutes les couleurs</option>
+              {% for couleur_item in couleurs %}
+                <option value="{{ couleur_item.couleur_id }}" {{ app.request.get('couleur_id') == couleur_item.couleur_id ? 'selected' : '' }}>
+                  {{ couleur_item.nom_couleur }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label for="condition" class="filtres__label">État</label>
+            <select id="condition" name="condition_id" class="filtres__select">
+              <option value="">Tous les états</option>
+              {% for condition_item in conditions %}
+                <option value="{{ condition_item.condition_id }}" {{ app.request.get('condition_id') == condition_item.condition_id ? 'selected' : '' }}>
+                  {{ condition_item.nom_condition }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="filtres__champ">
+            <label class="filtres__label">Certifié</label>
+            <label class="filtres__toggle">
+              <input type="checkbox" name="certifie" value="1" class="filtres__toggle-input" {{ app.request.get('certifie') ? 'checked' : '' }}>
+              <span class="filtres__toggle-slider"></span>
+            </label>
+          </div>
+        </details>
+        
+        <!-- Section Tri -->
+        <details class="filtres__section" open>
+          <summary class="filtres__section-titre">🔻 Tri</summary>
+          
+          <div class="filtres__champ">
+            <label for="sort" class="filtres__label">Trier par</label>
+            <select id="sort" name="sort" class="filtres__select">
+              <option value="date_desc" {{ app.request.get('sort') == 'date_desc' ? 'selected' : '' }}>Plus récents</option>
+              <option value="date_asc" {{ app.request.get('sort') == 'date_asc' ? 'selected' : '' }}>Plus anciens</option>
+              <option value="nom_asc" {{ app.request.get('sort') == 'nom_asc' ? 'selected' : '' }}>Nom A-Z</option>
+              <option value="nom_desc" {{ app.request.get('sort') == 'nom_desc' ? 'selected' : '' }}>Nom Z-A</option>
+            </select>
+          </div>
+        </details>
+        
+        <div class="filtres__actions">
+          <a href="{{ BASE }}/timbres" class="filtres__btn filtres__btn--reset">Réinitialiser</a>
+          <button type="submit" class="filtres__btn filtres__btn--apply">Appliquer</button>
+        </div>
+        
+      </form>
+
+      <!-- Action d'ajout -->
+      <div class="filtres__section-add">
+        <a href="{{ BASE }}/timbres/create" class="filtres__btn-add">
+          <span class="filtres__btn-add-icon">+</span>
+          Ajouter un timbre
+        </a>
+      </div>
+    </aside>
+
+    <!-- Catalogue à droite -->
+    <main class="catalogue">
+      <div class="catalogue__header-inline">
+        <h2 class="catalogue__titre">
+          {% if totalTimbres > 0 %}
+            {{ totalTimbres }} timbre{{ totalTimbres > 1 ? 's' : '' }} trouvé{{ totalTimbres > 1 ? 's' : '' }}
+          {% else %}
+            Aucun timbre trouvé
+          {% endif %}
+        </h2>
+        
+        {% if currentPage > 1 or totalPages > 1 %}
+          <div class="catalogue__pagination-info">
+            Page {{ currentPage }} sur {{ totalPages }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if timbres|length > 0 %}
+        <section class="grille-produits">
+          {% for timbre in timbres %}
+            <article class="carte-produit">
+              <div class="carte-produit__image-container">
+                {% if timbre.images and timbre.images|length > 0 %}
+                  {% if timbre.images|length > 1 %}
+                    <!-- Galerie Swiper pour plusieurs images -->
+                    <div class="swiper carte-produit__swiper" data-timbre-id="{{ timbre.timbre_id }}">
+                      <div class="swiper-wrapper">
+                        {% for image in timbre.images %}
+                          <div class="swiper-slide">
+                            <img class="carte-produit__gallery-image" 
+                                 src="{{ ASSET }}{{ image.url_image }}" 
+                                 alt="{{ timbre.nom }} - Image {{ loop.index }}" 
+                                 loading="lazy" />
+                          </div>
+                        {% endfor %}
+                      </div>
+                      
+                      <!-- Navigation -->
+                      <div class="swiper-button-next carte-produit__nav-next"></div>
+                      <div class="swiper-button-prev carte-produit__nav-prev"></div>
+                      
+                      <!-- Pagination -->
+                      <div class="swiper-pagination carte-produit__pagination"></div>
+                      
+                      <!-- Badge du nombre d'images -->
+                      <div class="carte-produit__images-count">
+                        📷 {{ timbre.images|length }}
+                      </div>
+                    </div>
+                  {% else %}
+                    <!-- Image unique -->
+                    <img class="carte-produit__single-image" 
+                         src="{{ ASSET }}{{ timbre.images[0].url_image }}" 
+                         alt="{{ timbre.nom }}" 
+                         loading="lazy" />
+                  {% endif %}
+                {% else %}
+                  <!-- Placeholder si aucune image -->
+                  <div class="carte-produit__placeholder-small">
+                    <span>📮</span>
+                  </div>
+                {% endif %}
+                
+                {% if timbre.certifié %}
+                  <span class="carte-produit__badge carte-produit__badge--certified">✓ Certifié</span>
+                {% endif %}
+
+                <!-- Actions propriétaire - positionnées sur l'image -->
+                {% if session.user_id and timbre.utilisateur_id == session.user_id %}
+                  <div class="carte-produit__floating-actions">
+                    <a href="{{ BASE }}/timbres/{{ timbre.timbre_id }}/edit" class="carte-produit__floating-btn carte-produit__floating-btn--edit" title="Modifier ce timbre">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                      </svg>
+                    </a>
+                    <form method="POST" action="{{ BASE }}/timbres/{{ timbre.timbre_id }}/delete" 
+                          style="display: inline-block;"
+                          onsubmit="return confirm('Supprimer ce timbre ?')">
+                      <button type="submit" class="carte-produit__floating-btn carte-produit__floating-btn--delete" title="Supprimer ce timbre">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <div class="carte-produit__contenu">
+                <h3 class="carte-produit__titre">{{ timbre.nom }}</h3>
+                
+                <ul class="carte-produit__infos">
+                  {% if timbre.nom_pays %}
+                    <li><strong>Pays :</strong> {{ timbre.nom_pays }}</li>
+                  {% endif %}
+                  {% if timbre.nom_condition %}
+                    <li><strong>État :</strong> {{ timbre.nom_condition }}</li>
+                  {% endif %}
+                  <li><strong>Ajouté :</strong> {{ timbre.date_creation|date('d/m/Y') }}</li>
+                </ul>
+                
+                <div class="carte-produit__actions">
+                  <a href="{{ BASE }}/timbres/{{ timbre.timbre_id }}" class="carte-produit__btn carte-produit__btn--primary">
+                    Voir détails
+                  </a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </section>
+
+        <!-- Pagination -->
+        {% if totalPages > 1 %}
+          <nav class="pagination catalogue__pagination">
+            {% if currentPage > 1 %}
+              <a href="{{ BASE }}/timbres?{{ app.request.query|merge({page: currentPage - 1})|url_encode }}" class="pagination__lien pagination__lien--prev">
+                ← Précédent
+              </a>
+            {% endif %}
+            
+            <div class="pagination__pages">
+              {% for page in 1..totalPages %}
+                {% if page == currentPage %}
+                  <span class="pagination__page pagination__page--current">{{ page }}</span>
+                {% elseif page == 1 or page == totalPages or (page >= currentPage - 2 and page <= currentPage + 2) %}
+                  <a href="{{ BASE }}/timbres?{{ app.request.query|merge({page: page})|url_encode }}" class="pagination__page">{{ page }}</a>
+                {% elseif page == currentPage - 3 or page == currentPage + 3 %}
+                  <span class="pagination__ellipsis">...</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            
+            {% if currentPage < totalPages %}
+              <a href="{{ BASE }}/timbres?{{ app.request.query|merge({page: currentPage + 1})|url_encode }}" class="pagination__lien pagination__lien--next">
+                Suivant →
+              </a>
+            {% endif %}
+          </nav>
+        {% endif %}
+        
+      {% else %}
+        <div class="catalogue__empty">
+          <div class="catalogue__empty-icon">📮</div>
+          <h3 class="catalogue__empty-title">Aucun timbre trouvé</h3>
+          <p class="catalogue__empty-text">
+            {% if app.request.query %}
+              Aucun timbre ne correspond à vos critères. Essayez de modifier vos filtres.
+            {% else %}
+              Il n'y a actuellement aucun timbre dans le catalogue. Soyez le premier à ajouter un timbre !
+            {% endif %}
+          </p>
+          <div class="catalogue__empty-actions">
+            {% if app.request.query %}
+              <a href="{{ BASE }}/timbres" class="fiche-timbre__btn fiche-timbre__btn--secondary">
+                Voir tous les timbres
+              </a>
+            {% endif %}
+            <a href="{{ BASE }}/timbres/create" class="fiche-timbre__btn">
+              Ajouter un timbre
+            </a>
+          </div>
+        </div>
+      {% endif %}
+    </main>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="{{ ASSET }}assets/js/filtres.js"></script>
+<script src="{{ ASSET }}assets/js/galerie-swiper.js"></script>
+{% endblock %}

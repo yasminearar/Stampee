@@ -1,0 +1,712 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}{{ title }} – Stampee{% endblock %}
+
+{% block description %}Ajoutez un nouveau timbre à votre collection sur Lord Stampee - Plateforme d'enchères de timbres rares et d'exception.{% endblock %}
+
+{% block styles %}
+<!-- Cropper.js CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="fiche-timbre add-timbre-page">
+  <section class="fiche-timbre__contenu">
+    <header class="fiche-timbre__entete add-timbre-page__header">
+      <h1 class="fiche-timbre__titre">Ajouter un timbre</h1>
+      <p class="page-description">Complétez les informations de votre timbre pour l'ajouter à la collection.</p>
+    </header>
+
+    {% if errors %}
+      <div class="flash-messages">
+        {% for field, error in errors %}
+          <div class="flash-messages__item flash-messages__item--error">
+            {{ error }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form class="filtres__formulaire add-timbre-page__form" method="POST" action="{{ BASE }}/timbres/store" enctype="multipart/form-data">
+      
+      <!-- Section Informations principales -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Informations principales</summary>
+        
+        <div class="filtres__champ">
+          <label for="nom" class="filtres__label">Nom du timbre *</label>
+          <input type="text" id="nom" name="nom" class="filtres__input" required value="{{ old.nom ?? '' }}">
+          <small class="filtres__aide">Donnez un nom descriptif à votre timbre.</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="description" class="filtres__label">Description</label>
+          <textarea id="description" name="description" class="filtres__input add-timbre-page__textarea" rows="4">{{ old.description ?? '' }}</textarea>
+          <small class="filtres__aide">Décrivez les particularités de votre timbre.</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label class="filtres__radio-label">
+            <input type="checkbox" name="certifie" class="filtres__radio" {{ old.certifie ? 'checked' : '' }}>
+            <span class="filtres__radio-texte">Timbre certifié</span>
+          </label>
+          <small class="filtres__aide">Cochez si le timbre possède un certificat d'authenticité.</small>
+        </div>
+      </details>
+      
+      <!-- Section Caractéristiques techniques -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Caractéristiques techniques</summary>
+        
+        <div class="filtres__champ">
+          <label for="condition_id" class="filtres__label">Condition</label>
+          <select id="condition_id" name="condition_id" class="filtres__input">
+            <option value="">Sélectionner une condition</option>
+            {% for condition in conditions %}
+              <option value="{{ condition.condition_id }}" {{ old.condition_id == condition.condition_id ? 'selected' : '' }}>
+                {{ condition.nom_condition }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="pays_id" class="filtres__label">Pays d'origine</label>
+          <select id="pays_id" name="pays_id" class="filtres__input">
+            <option value="">Sélectionner un pays</option>
+            {% for pays in pays %}
+              <option value="{{ pays.pays_id }}" {{ old.pays_id == pays.pays_id ? 'selected' : '' }}>
+                {{ pays.nom_pays }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="couleur_id" class="filtres__label">Couleur principale</label>
+          <select id="couleur_id" name="couleur_id" class="filtres__input">
+            <option value="">Sélectionner une couleur</option>
+            {% for couleur in couleurs %}
+              <option value="{{ couleur.couleur_id }}" {{ old.couleur_id == couleur.couleur_id ? 'selected' : '' }}>
+                {{ couleur.nom_couleur }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="tirage" class="filtres__label">Tirage</label>
+          <input type="number" id="tirage" name="tirage" class="filtres__input" min="1" value="{{ old.tirage ?? '' }}">
+          <small class="filtres__aide">Nombre d'exemplaires imprimés (si connu).</small>
+        </div>
+        
+        <div class="filtres__champ">
+          <label for="dimensions" class="filtres__label">Dimensions</label>
+          <input type="text" id="dimensions" name="dimensions" class="filtres__input" placeholder="ex: 25 x 30 mm" value="{{ old.dimensions ?? '' }}">
+          <small class="filtres__aide">Format : largeur x hauteur (en mm).</small>
+        </div>
+      </details>
+      
+      <!-- Section Images -->
+      <details class="filtres__section" open>
+        <summary class="filtres__section-titre">Images du timbre</summary>
+        
+        <!-- Zone de drop et sélection -->
+        <div class="image-upload-zone">
+          <div class="image-upload-zone__drop-area" id="drop-area">
+            <div class="image-upload-zone__content">
+              <svg class="image-upload-zone__icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+              </svg>
+              <h3 class="image-upload-zone__title">Ajouter des images</h3>
+              <p class="image-upload-zone__text">
+                Glissez-déposez vos images ici ou 
+                <button type="button" class="image-upload-zone__button" id="select-files-btn">
+                  parcourez vos fichiers
+                </button>
+              </p>
+              <small class="image-upload-zone__hint">
+                Formats acceptés : JPEG, PNG, WebP • Taille max : 5MB par image
+              </small>
+            </div>
+          </div>
+          
+          <!-- Input file caché -->
+          <input type="file" id="images" name="images[]" class="image-upload-zone__input" accept="image/jpeg,image/png,image/webp" multiple hidden>
+        </div>
+        
+        <!-- Zone de prévisualisation -->
+        <div id="image-preview" class="image-preview-grid" style="margin-top: 1.5rem;"></div>
+        
+        <!-- Modal pour le crop -->
+        <div id="crop-modal" class="crop-modal" style="display: none;">
+          <div class="crop-modal__content">
+            <div class="crop-modal__header">
+              <h3>Recadrer l'image</h3>
+              <button type="button" id="close-crop-modal" class="crop-modal__close">&times;</button>
+            </div>
+            <div class="crop-modal__body">
+              <div class="crop-container">
+                <img id="crop-image" src="" alt="Image à recadrer">
+              </div>
+            </div>
+            <div class="crop-modal__footer">
+              <button type="button" id="cancel-crop" class="fiche-timbre__btn fiche-timbre__btn--secondary">Annuler</button>
+              <button type="button" id="apply-crop" class="fiche-timbre__btn">Appliquer le recadrage</button>
+            </div>
+          </div>
+        </div>
+      </details>
+      
+      <!-- Boutons d'action -->
+      <div class="fiche-timbre__actions add-timbre-page__actions">
+        <button type="button" class="fiche-timbre__btn fiche-timbre__btn--secondary" onclick="history.back()">
+          Annuler
+        </button>
+        <button type="submit" class="fiche-timbre__btn">
+          Ajouter le timbre
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<!-- Cropper.js JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropArea = document.getElementById('drop-area');
+    const imageInput = document.getElementById('images');
+    const selectFilesBtn = document.getElementById('select-files-btn');
+    const imagePreview = document.getElementById('image-preview');
+    const cropModal = document.getElementById('crop-modal');
+    const cropImage = document.getElementById('crop-image');
+    const closeCropModal = document.getElementById('close-crop-modal');
+    const cancelCrop = document.getElementById('cancel-crop');
+    const applyCrop = document.getElementById('apply-crop');
+    
+    let cropper = null;
+    let currentImageIndex = null;
+    let imageFiles = [];
+    
+    // Événements pour la zone de drop
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // Effets visuels pour le drag & drop
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight(e) {
+        dropArea.classList.add('image-upload-zone__drop-area--dragover');
+    }
+    
+    function unhighlight(e) {
+        dropArea.classList.remove('image-upload-zone__drop-area--dragover');
+    }
+    
+    // Gestion du drop
+    dropArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles(files);
+    }
+    
+    // Clic sur le bouton de sélection
+    selectFilesBtn.addEventListener('click', function() {
+        imageInput.click();
+    });
+    
+    // Changement dans l'input file
+    imageInput.addEventListener('change', function(e) {
+        handleFiles(e.target.files);
+    });
+    
+    function handleFiles(files) {
+        ([...files]).forEach(processFile);
+    }
+    
+    function processFile(file) {
+        if (!isValidImageFile(file)) {
+            showError(`Le fichier "${file.name}" n'est pas un format d'image valide.`);
+            return;
+        }
+        
+        if (file.size > 5 * 1024 * 1024) { // 5MB
+            showError(`Le fichier "${file.name}" est trop volumineux (max 5MB).`);
+            return;
+        }
+        
+        // Auto-crop pour chaque nouvelle image
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            openCropModalForNewImage(e.target.result, file);
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    function isValidImageFile(file) {
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+        return validTypes.includes(file.type);
+    }
+    
+    function openCropModalForNewImage(imageSrc, originalFile) {
+        cropImage.src = imageSrc;
+        cropModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Stocker le fichier original temporairement
+        cropModal.dataset.originalFile = JSON.stringify({
+            name: originalFile.name,
+            type: originalFile.type,
+            size: originalFile.size
+        });
+        cropModal.dataset.isNewImage = 'true';
+        
+        // Initialize cropper
+        setTimeout(() => {
+            if (cropper) {
+                cropper.destroy();
+            }
+            
+            cropper = new Cropper(cropImage, {
+                aspectRatio: NaN, // Ratio libre
+                viewMode: 1,
+                dragMode: 'move',
+                autoCropArea: 0.9,
+                restore: false,
+                guides: true,
+                center: true,
+                highlight: false,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: false,
+                modal: true,
+                background: true,
+                zoomable: true,
+                rotatable: true,
+                scalable: true,
+                responsive: true,
+                checkOrientation: false
+            });
+        }, 100);
+    }
+    
+    function openCropModalForExistingImage(imageSrc, index) {
+        currentImageIndex = index;
+        cropImage.src = imageSrc;
+        cropModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        cropModal.dataset.isNewImage = 'false';
+        
+        // Initialize cropper
+        setTimeout(() => {
+            if (cropper) {
+                cropper.destroy();
+            }
+            
+            cropper = new Cropper(cropImage, {
+                aspectRatio: NaN,
+                viewMode: 1,
+                dragMode: 'move',
+                autoCropArea: 0.9,
+                restore: false,
+                guides: true,
+                center: true,
+                highlight: false,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: false,
+                modal: true,
+                background: true,
+                zoomable: true,
+                rotatable: true,
+                scalable: true,
+                responsive: true
+            });
+        }, 100);
+    }
+    
+    function closeCropModalHandler() {
+        if (cropper) {
+            cropper.destroy();
+            cropper = null;
+        }
+        cropModal.style.display = 'none';
+        document.body.style.overflow = '';
+        currentImageIndex = null;
+        delete cropModal.dataset.originalFile;
+        delete cropModal.dataset.isNewImage;
+    }
+    
+    // Event listeners pour le modal
+    closeCropModal.addEventListener('click', closeCropModalHandler);
+    cancelCrop.addEventListener('click', closeCropModalHandler);
+    
+    // Fermer le modal en cliquant à l'extérieur
+    cropModal.addEventListener('click', function(e) {
+        if (e.target === cropModal) {
+            closeCropModalHandler();
+        }
+    });
+    
+    // Appliquer le crop
+    applyCrop.addEventListener('click', function() {
+        if (!cropper) return;
+        
+        // Déterminer la taille optimale basée sur l'image originale
+        const imageData = cropper.getImageData();
+        const canvasData = cropper.getCanvasData();
+        
+        // Calculer les dimensions optimales (max 1200px pour la plus grande dimension)
+        const maxDimension = 1200;
+        const ratio = Math.min(maxDimension / imageData.naturalWidth, maxDimension / imageData.naturalHeight);
+        const optimalWidth = Math.floor(imageData.naturalWidth * ratio);
+        const optimalHeight = Math.floor(imageData.naturalHeight * ratio);
+        
+        // Configuration de compression intelligente
+        const canvas = cropper.getCroppedCanvas({
+            width: optimalWidth,
+            height: optimalHeight,
+            minWidth: 400,
+            minHeight: 300,
+            maxWidth: 1200,
+            maxHeight: 1200,
+            fillColor: '#ffffff',
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high'
+        });
+        
+        // Compression adaptative selon le type d'image
+        const isNewImage = cropModal.dataset.isNewImage === 'true';
+        const originalFileData = isNewImage ? 
+            JSON.parse(cropModal.dataset.originalFile) : 
+            imageFiles[currentImageIndex];
+        
+        // Déterminer le format et la qualité optimaux
+        let outputFormat = 'image/jpeg';
+        let quality = 0.88; // Qualité par défaut
+        
+        if (originalFileData.type === 'image/png') {
+            // Pour les PNG, vérifier s'il y a de la transparence
+            checkTransparency(canvas).then(hasTransparency => {
+                if (hasTransparency) {
+                    outputFormat = 'image/png';
+                    quality = 0.95;
+                } else {
+                    outputFormat = 'image/jpeg';
+                    quality = 0.90;
+                }
+                compressAndSave(canvas, outputFormat, quality, isNewImage, originalFileData);
+            });
+        } else if (originalFileData.type === 'image/webp') {
+            outputFormat = 'image/webp';
+            quality = 0.85;
+            compressAndSave(canvas, outputFormat, quality, isNewImage, originalFileData);
+        } else {
+            // JPEG
+            outputFormat = 'image/jpeg';
+            quality = 0.88;
+            compressAndSave(canvas, outputFormat, quality, isNewImage, originalFileData);
+        }
+    });
+    
+    function checkTransparency(canvas) {
+        return new Promise((resolve) => {
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            
+            // Vérifier les pixels alpha
+            for (let i = 3; i < data.length; i += 4) {
+                if (data[i] < 255) {
+                    resolve(true); // A de la transparence
+                    return;
+                }
+            }
+            resolve(false); // Pas de transparence
+        });
+    }
+    
+    function compressAndSave(canvas, format, quality, isNewImage, originalFileData) {
+        canvas.toBlob(function(blob) {
+            if (!blob) {
+                showError('Erreur lors de la compression de l\'image.');
+                return;
+            }
+            
+            // Calculer la réduction de taille
+            const originalSize = isNewImage ? 
+                JSON.parse(cropModal.dataset.originalFile).size : 
+                originalFileData.size;
+            const newSize = blob.size;
+            const reduction = ((originalSize - newSize) / originalSize * 100).toFixed(1);
+            
+            console.log(`Compression: ${formatFileSize(originalSize)} → ${formatFileSize(newSize)} (-${reduction}%)`);
+            
+            const fileName = isNewImage ? 
+                JSON.parse(cropModal.dataset.originalFile).name : 
+                originalFileData.name;
+            
+            // Créer le fichier optimisé
+            const optimizedFile = new File([blob], fileName, {
+                type: format,
+                lastModified: Date.now()
+            });
+            
+            if (isNewImage) {
+                imageFiles.push(optimizedFile);
+                addImageToPreview(optimizedFile, imageFiles.length - 1);
+            } else {
+                imageFiles[currentImageIndex] = optimizedFile;
+                updateImagePreview(currentImageIndex, optimizedFile);
+            }
+            
+            updateFileInput();
+            closeCropModalHandler();
+            
+            // Afficher un message de succès avec les stats
+            if (reduction > 10) {
+                showSuccess(`Image optimisée ! Taille réduite de ${reduction}% (${formatFileSize(newSize)})`);
+            }
+        }, format, quality);
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+    
+    function addImageToPreview(file, index) {
+        if (imageFiles.length === 1) {
+            // Première image, créer le titre
+            const title = document.createElement('h4');
+            title.className = 'image-preview-grid__title';
+            title.id = 'preview-title';
+            imagePreview.appendChild(title);
+            
+            const container = document.createElement('div');
+            container.className = 'image-preview-grid__container';
+            container.id = 'preview-container';
+            imagePreview.appendChild(container);
+        }
+        
+        updatePreviewTitle();
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const container = document.getElementById('preview-container');
+            
+            const imageItem = document.createElement('div');
+            imageItem.className = 'image-preview-item';
+            imageItem.dataset.index = index;
+            
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = `image-preview-item__img ${index === 0 ? 'image-preview-item__img--principal' : ''}`;
+            img.addEventListener('click', function() {
+                openCropModalForExistingImage(e.target.result, index);
+            });
+            
+            const controls = document.createElement('div');
+            controls.className = 'image-preview-item__controls';
+            
+            const label = document.createElement('span');
+            label.textContent = index === 0 ? 'Image principale' : `Image ${index + 1}`;
+            label.className = `image-preview-item__label ${index === 0 ? 'image-preview-item__label--principal' : ''}`;
+            
+            // Ajouter les informations de taille
+            const fileInfo = document.createElement('div');
+            fileInfo.className = 'image-preview-item__info';
+            fileInfo.innerHTML = `
+                <small style="color: #64748b; font-size: 0.75rem;">
+                    📁 ${formatFileSize(file.size)}
+                </small>
+            `;
+            
+            const actions = document.createElement('div');
+            actions.className = 'image-preview-item__actions';
+            
+            const cropBtn = document.createElement('button');
+            cropBtn.type = 'button';
+            cropBtn.className = 'image-preview-item__btn image-preview-item__btn--crop';
+            cropBtn.innerHTML = '✂️ Recadrer';
+            cropBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openCropModalForExistingImage(img.src, index);
+            });
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.type = 'button';
+            deleteBtn.className = 'image-preview-item__btn image-preview-item__btn--delete';
+            deleteBtn.innerHTML = '🗑️ Supprimer';
+            deleteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                removeImage(index);
+            });
+            
+            actions.appendChild(cropBtn);
+            actions.appendChild(deleteBtn);
+            controls.appendChild(label);
+            controls.appendChild(fileInfo);
+            controls.appendChild(actions);
+            
+            imageItem.appendChild(img);
+            imageItem.appendChild(controls);
+            container.appendChild(imageItem);
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    function updateImagePreview(index, file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageItem = document.querySelector(`[data-index="${index}"]`);
+            if (imageItem) {
+                const img = imageItem.querySelector('.image-preview-item__img');
+                img.src = e.target.result;
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+    
+    function removeImage(index) {
+        imageFiles.splice(index, 1);
+        
+        // Réorganiser les index
+        imageFiles.forEach((file, newIndex) => {
+            const imageItem = document.querySelector(`[data-index="${index + newIndex + 1}"]`);
+            if (imageItem) {
+                imageItem.dataset.index = newIndex;
+                const label = imageItem.querySelector('.image-preview-item__label');
+                const img = imageItem.querySelector('.image-preview-item__img');
+                
+                // Mettre à jour les classes et labels
+                if (newIndex === 0) {
+                    label.textContent = 'Image principale';
+                    label.className = 'image-preview-item__label image-preview-item__label--principal';
+                    img.className = 'image-preview-item__img image-preview-item__img--principal';
+                } else {
+                    label.textContent = `Image ${newIndex + 1}`;
+                    label.className = 'image-preview-item__label';
+                    img.className = 'image-preview-item__img';
+                }
+            }
+        });
+        
+        // Supprimer l'élément du DOM
+        const imageItem = document.querySelector(`[data-index="${index}"]`);
+        if (imageItem) {
+            imageItem.remove();
+        }
+        
+        // Si plus d'images, nettoyer la prévisualisation
+        if (imageFiles.length === 0) {
+            imagePreview.innerHTML = '';
+        } else {
+            updatePreviewTitle();
+        }
+        
+        updateFileInput();
+    }
+    
+    function updatePreviewTitle() {
+        const title = document.getElementById('preview-title');
+        if (title) {
+            title.textContent = `${imageFiles.length} image(s) sélectionnée(s)`;
+        }
+    }
+    
+    function updateFileInput() {
+        const dt = new DataTransfer();
+        imageFiles.forEach(file => {
+            if (file) dt.items.add(file);
+        });
+        imageInput.files = dt.files;
+    }
+    
+    function showError(message) {
+        // Créer une notification d'erreur temporaire
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'upload-error';
+        errorDiv.textContent = message;
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px 20px;
+            border-radius: 6px;
+            border: 1px solid #f5c6cb;
+            z-index: 10000;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+        
+        document.body.appendChild(errorDiv);
+        
+        setTimeout(() => {
+            errorDiv.remove();
+        }, 5000);
+    }
+    
+    function showSuccess(message) {
+        // Créer une notification de succès temporaire
+        const successDiv = document.createElement('div');
+        successDiv.className = 'upload-success';
+        successDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 16px;">✅</span>
+                <span>${message}</span>
+            </div>
+        `;
+        successDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #d1edff;
+            color: #0c4a6e;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 1px solid #7dd3fc;
+            z-index: 10000;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+            animation: slideInRight 0.3s ease-out;
+        `;
+        
+        document.body.appendChild(successDiv);
+        
+        setTimeout(() => {
+            successDiv.style.animation = 'slideOutRight 0.3s ease-in forwards';
+            setTimeout(() => successDiv.remove(), 300);
+        }, 4000);
+    }
+    
+    // ESC pour fermer le modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && cropModal.style.display === 'flex') {
+            closeCropModalHandler();
+        }
+    });
+});
+</script>
+{% endblock %}

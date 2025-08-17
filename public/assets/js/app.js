@@ -162,4 +162,83 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // ===================================
+  // VALIDATION FORMULAIRE D'AJOUT DE TIMBRE
+  // ===================================
+  const addTimbreForm = document.querySelector('form[action*="/timbres/store"]');
+  if (addTimbreForm) {
+    const nomInput = document.getElementById('nom');
+    const tirageInput = document.getElementById('tirage');
+    const dimensionsInput = document.getElementById('dimensions');
+    const imageInput = document.getElementById('image');
+    
+    addTimbreForm.addEventListener('submit', function(event) {
+      // Validation du nom (obligatoire)
+      if (!nomInput.value.trim()) {
+        event.preventDefault();
+        alert('Le nom du timbre est obligatoire.');
+        nomInput.focus();
+        return false;
+      }
+      
+      // Validation du tirage (nombre positif si fourni)
+      if (tirageInput.value && (isNaN(tirageInput.value) || parseInt(tirageInput.value) < 1)) {
+        event.preventDefault();
+        alert('Le tirage doit être un nombre positif.');
+        tirageInput.focus();
+        return false;
+      }
+      
+      // Validation des dimensions (format basique si fourni)
+      if (dimensionsInput.value) {
+        const dimensionsPattern = /^\d+\s*[x×]\s*\d+/;
+        if (!dimensionsPattern.test(dimensionsInput.value)) {
+          event.preventDefault();
+          alert('Format attendu pour les dimensions : largeur x hauteur (ex: 25 x 30).');
+          dimensionsInput.focus();
+          return false;
+        }
+      }
+      
+      // Validation de l'image (taille et type si fourni)
+      if (imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        const maxSize = 2 * 1024 * 1024; // 2MB
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        
+        if (file.size > maxSize) {
+          event.preventDefault();
+          alert('L\'image ne doit pas dépasser 2MB.');
+          return false;
+        }
+        
+        if (!allowedTypes.includes(file.type)) {
+          event.preventDefault();
+          alert('Formats d\'image acceptés : JPEG, PNG, WebP.');
+          return false;
+        }
+      }
+    });
+  }
+
+  // ===================================
+  // GALERIE D'IMAGES TIMBRE
+  // ===================================
+  // Fonction globale pour la galerie d'images dans la page de détails
+  window.changeMainImage = function(newSrc, thumbnail) {
+    const mainImage = document.getElementById('mainImage');
+    const thumbnails = document.querySelectorAll('.timbre-gallery__thumb');
+    
+    if (mainImage) {
+      // Changer l'image principale
+      mainImage.src = newSrc;
+      
+      // Mettre à jour les classes actives des miniatures
+      thumbnails.forEach(thumb => thumb.classList.remove('timbre-gallery__thumb--active'));
+      if (thumbnail) {
+        thumbnail.classList.add('timbre-gallery__thumb--active');
+      }
+    }
+  };
 });

@@ -260,10 +260,35 @@
   font-weight: 700;
   text-decoration: none;
   padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.entete__menu-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.entete__menu-lock {
+  width: 12px;
+  height: 12px;
+  opacity: 0.7;
+  margin-left: 0.25rem;
 }
 
 .entete__menu-principal a:hover {
   border-bottom: 2px solid var(--color-creme-leger);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.entete__menu-principal a.entete__menu-link--active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid var(--color-creme-leger);
+  border-radius: 4px 4px 0 0;
 }
 
 /* === Menu secondaire === */
